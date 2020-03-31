@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">安卓玩Kt版</string>
+    <string name="str_desc">desc</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_title">标题</string>
+</resources>

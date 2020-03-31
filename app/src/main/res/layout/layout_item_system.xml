@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/dp_50"
+        android:padding="@dimen/dp_5"
+        android:text="@string/str_title"
+        android:textColor="@color/color_222222"
+        android:textSize="@dimen/sp_16" />
+
+    <com.donkingliang.labels.LabelsView
+        android:id="@+id/label_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:padding="@dimen/dp_5" />
+
+</RelativeLayout>
