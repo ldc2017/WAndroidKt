@@ -4,12 +4,40 @@
 
     <data>
 
+        <variable
+            name="eventListener"
+            type="com.ldc.wandroidkt.ui.activitys.WebViewActivity.EventListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.activitys.WebViewActivity">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <FrameLayout
+            android:id="@+id/fl_back"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="top|left"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_30"
+            android:background="@drawable/round_bg"
+            android:elevation="@dimen/dp_10"
+            android:onClick="@{(v)->eventListener.onBack(v)}">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_back" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/line_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+
+    </FrameLayout>
 </layout>

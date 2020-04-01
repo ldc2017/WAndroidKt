@@ -40,7 +40,7 @@ object Api2Request {
                 Log.e(TAG, "网络请求----$message")
             }
         })
-        show_net_log.level = HttpLoggingInterceptor.Level.BODY
+        show_net_log.level = HttpLoggingInterceptor.Level.HEADERS
         return show_net_log
     }
 }

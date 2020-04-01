@@ -4,6 +4,8 @@ import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.ToastUtils
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.HomeArticleAdapter
 import com.ldc.wandroidkt.adapter.HomeBannerAdapter
@@ -12,8 +14,12 @@ import com.ldc.wandroidkt.contract.HomeContract
 import com.ldc.wandroidkt.core.BaseFragment
 import com.ldc.wandroidkt.databinding.FragmentHomeBinding
 import com.ldc.wandroidkt.http.Api
-import com.ldc.wandroidkt.model.*
+import com.ldc.wandroidkt.model.BannerModel
+import com.ldc.wandroidkt.model.BannerModelItem
+import com.ldc.wandroidkt.model.BaseModel
+import com.ldc.wandroidkt.model.HomeArticleModel
 import com.ldc.wandroidkt.presenter.HomePresenter
+import com.ldc.wandroidkt.ui.activitys.WebViewActivity
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.youth.banner.config.IndicatorConfig
@@ -41,7 +47,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                 return@Callback true
             }
             refresh_home_article_code -> {
-                val dts: MutableList<Data> = msg.obj as MutableList<Data>
+                val dts: MutableList<HomeArticleModel.Data> =
+                    msg.obj as MutableList<HomeArticleModel.Data>
                 if (1 == curr_index) {
                     home_article_adapter.setNewData(dts)
                 } else {
@@ -190,6 +197,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         mBinding.dataList.setHasFixedSize(true)
         mBinding.dataList.adapter = home_article_adapter
         home_article_adapter.setEmptyView(R.layout.layout_view_no_data)
+        home_article_adapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+                val dts: MutableList<HomeArticleModel.Data> =
+                    adapter.data as MutableList<HomeArticleModel.Data> ?: return
+                val dt: HomeArticleModel.Data = dts[position] ?: return
+                WebViewActivity.actionStart(activity!!, dt.link, dt.chapterName)
+            }
+        })
 
     }
 

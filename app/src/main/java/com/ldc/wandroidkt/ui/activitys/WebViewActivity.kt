@@ -2,6 +2,7 @@ package com.ldc.wandroidkt.ui.activitys
 
 import android.app.Activity
 import android.content.Intent
+import android.view.View
 import com.blankj.utilcode.util.ToastUtils
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.commom.cmConstants
@@ -24,7 +25,7 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>()
         fun actionStart(act: Activity, curr_link: String, curr_name: String) {
             strLink = curr_link
             strName = curr_name
-            val intent = Intent(act, WebViewActivity.javaClass)
+            val intent = Intent(act, WebViewActivity::class.java)
             act.startActivity(intent)
         }
 
@@ -40,6 +41,7 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>()
     }
 
     override fun init_view() {
+        mBinding.eventListener = EventListener()
 
     }
 
@@ -68,6 +70,16 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>()
     override fun getSizeInDp(): Float {
         return cmConstants.SizeInDp
 
+    }
+
+
+    //点击事件
+    inner class EventListener {
+
+        //点击返回按钮
+        fun onBack(v: View) {
+            finish()
+        }
     }
 
 

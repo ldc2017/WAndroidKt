@@ -24,7 +24,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tool_bar"
-                android:background="@color/ccolor_ffffff"
+                android:background="@color/color_ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
                 app:contentInsetStartWithNavigation="@dimen/dp_10"
