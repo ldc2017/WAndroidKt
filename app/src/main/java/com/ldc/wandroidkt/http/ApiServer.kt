@@ -3,7 +3,7 @@ package com.ldc.wandroidkt.http
 import com.ldc.wandroidkt.model.*
 import io.reactivex.Observable
 import retrofit2.http.GET
-import retrofit2.http.PATCH
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -55,6 +55,13 @@ interface ApiServer {
         @Path(value = "index") index: Int = 0,
         @Query(value = "cid") cid: String
     ): Observable<BaseModel<SystemArticleModel>>
+
+    //登录
+    @POST(value = "/user/login")
+    fun login(
+        @Query(value = "username") user_name: String = "",
+        @Query(value = "password") password: String = ""
+    ): Observable<BaseModel<LoginModel>>
 
 
 }

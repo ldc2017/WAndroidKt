@@ -1,6 +1,8 @@
 package com.ldc.wandroidkt.ui.activitys
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.blankj.utilcode.util.ToastUtils
@@ -19,12 +21,21 @@ import me.yokeyword.fragmentation.SupportFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainContract.V {
 
+
+    companion object {
+        fun actionStart(act: Activity) {
+            val intent = Intent(act, MainActivity::class.java)
+            act.startActivity(intent)
+        }
+    }
+
     private val tabs: Array<String> = arrayOf<String>("首页", "项目", "体系", "公众号")
     private val fragments: Array<SupportFragment?> = arrayOfNulls<SupportFragment>(tabs.size)
     @Volatile
     private var curr_selected_position = 0
     @Volatile
     private var curr_fragment: SupportFragment? = null
+
 
     override fun ui(): Int {
         return R.layout.activity_main
@@ -37,6 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
 
     @SuppressLint("WrongConstant")
     override fun init_view() {
+        setResult(Activity.RESULT_OK)
         init_fragment()
         init_bottomNavigationBar()
 

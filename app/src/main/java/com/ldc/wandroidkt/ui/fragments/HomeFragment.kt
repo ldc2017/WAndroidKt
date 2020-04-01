@@ -178,11 +178,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         mBinding.banner.setDelayTime(3000)
         mBinding.banner.setOnBannerListener(object : OnBannerListener<BannerModelItem> {
             override fun onBannerChanged(position: Int) {
-                mBinding.banner
+                // TODO(不操作)
             }
 
             override fun OnBannerClick(data: BannerModelItem?, position: Int) {
-                mBinding.banner
+                WebViewActivity.actionStart(activity!!, data!!.url, data.title)
             }
         })
     }
