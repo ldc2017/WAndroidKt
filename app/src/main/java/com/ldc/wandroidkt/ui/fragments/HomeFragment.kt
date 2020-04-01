@@ -25,7 +25,6 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.listener.OnBannerListener
-import com.youth.banner.util.BannerUtils
 
 /**
  * A simple [Fragment] subclass.
@@ -175,10 +174,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         mBinding.banner.setIndicator(CircleIndicator(activity))
         mBinding.banner.setIndicatorSelectedColorRes(R.color.color_e6ff5252)//选中
         mBinding.banner.setIndicatorNormalColorRes(R.color.color_b3ff5252)//未选中
-        mBinding.banner.setIndicatorGravity(IndicatorConfig.Direction.LEFT)
-        mBinding.banner.setIndicatorSpace(BannerUtils.dp2px(20f))
-        mBinding.banner.setIndicatorMargins(IndicatorConfig.Margins(BannerUtils.dp2px(10F).toInt()))
-        mBinding.banner.setIndicatorWidth(10, 20)
+        mBinding.banner.setIndicatorGravity(IndicatorConfig.Direction.CENTER)
+        mBinding.banner.setDelayTime(3000)
         mBinding.banner.setOnBannerListener(object : OnBannerListener<BannerModelItem> {
             override fun onBannerChanged(position: Int) {
                 mBinding.banner
