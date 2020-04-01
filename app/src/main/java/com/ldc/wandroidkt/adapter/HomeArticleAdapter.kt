@@ -36,7 +36,8 @@ class HomeArticleAdapter :
         if (!TextUtils.isEmpty(item.envelopePic)) {
             helper.setGone(R.id.icon_image, false)
             Picasso.get().load(item.envelopePic)
-                .resize(100, 100)
+                .resize(200, 160)
+                .placeholder(R.drawable.icon_imager_helper)
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .into(helper.getView<RoundedImageView>(R.id.icon_image))
         } else {

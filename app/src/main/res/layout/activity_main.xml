@@ -14,22 +14,19 @@
         tools:context=".ui.activitys.MainActivity">
 
 
-        <androidx.viewpager.widget.ViewPager
+        <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/tab_layout" />
+            android:layout_above="@id/bottom_navigation_bar" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            style="@style/tablayout_style"
+        <com.ashokvarma.bottomnavigation.BottomNavigationBar
+            android:id="@+id/bottom_navigation_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:tabBackground="@color/color_54ffffff"
-            app:tabIndicatorColor="@color/color_e6ff5252"
-            app:tabInlineLabel="true"
-            app:tabMode="fixed" />
+            android:layout_gravity="bottom"
+            app:bnbBackgroundStyle="background_style_ripple" />
 
     </RelativeLayout>
 </layout>

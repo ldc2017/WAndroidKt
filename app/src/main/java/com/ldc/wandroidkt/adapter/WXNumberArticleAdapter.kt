@@ -7,7 +7,6 @@ import androidx.core.text.HtmlCompat
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.ldc.wandroidkt.R
-import com.ldc.wandroidkt.model.Data
 import com.ldc.wandroidkt.model.WxNumberArticleModel
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.MemoryPolicy
@@ -37,7 +36,8 @@ class WXNumberArticleAdapter :
         if (!TextUtils.isEmpty(item.envelopePic)) {
             helper.setGone(R.id.icon_image, false)
             Picasso.get().load(item.envelopePic)
-                .resize(100, 100)
+                .resize(200, 160)
+                .placeholder(R.drawable.icon_imager_helper)
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .into(helper.getView<RoundedImageView>(R.id.icon_image))
         } else {

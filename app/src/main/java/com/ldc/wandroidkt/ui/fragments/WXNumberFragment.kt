@@ -19,7 +19,6 @@ import com.ldc.wandroidkt.model.WXNumberModel
 import com.ldc.wandroidkt.model.WXNumberModelItem
 import com.ldc.wandroidkt.presenter.WXNumberPresenter
 import me.yokeyword.fragmentation.SupportFragment
-import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass.
@@ -47,13 +46,6 @@ class WXNumberFragment : BaseFragment<FragmentWxNumberBinding, WXNumberPresenter
     override fun onDestroy() {
         super.onDestroy()
         uiHandler.removeCallbacksAndMessages(null)
-    }
-
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        if (!hidden) {
-            mPresenter.get_wx_number_req()
-        }
     }
 
     override fun isBaseOnWidth(): Boolean {

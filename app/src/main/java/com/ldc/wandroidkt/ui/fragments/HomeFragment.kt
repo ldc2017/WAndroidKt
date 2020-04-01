@@ -56,6 +56,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     })
 
 
+    override fun onStart() {
+        super.onStart()
+        mBinding.banner.start()
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        mBinding.banner.stop()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         uiHandler.removeCallbacksAndMessages(null)

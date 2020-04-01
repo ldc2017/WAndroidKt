@@ -54,6 +54,7 @@
                             android:layout_height="@dimen/dp_200"
                             android:focusable="true"
                             android:focusableInTouchMode="true"
+                            app:indicator_gravity="center"
                             app:layout_collapseMode="pin" />
 
                         <ImageView
