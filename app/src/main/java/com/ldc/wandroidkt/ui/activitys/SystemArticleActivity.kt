@@ -2,13 +2,12 @@ package com.ldc.wandroidkt.ui.activitys
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
 import android.view.View
-import com.blankj.utilcode.util.ApiUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.SystemArticleAdapter
 import com.ldc.wandroidkt.commom.cmConstants
@@ -143,6 +142,14 @@ class SystemArticleActivity : BaseActivity<ActivitySystemArticleBinding, SystemA
         mBinding.dataList.setItemViewCacheSize(10)
         mBinding.dataList.adapter = systemArticleAdapter
         systemArticleAdapter.setEmptyView(R.layout.layout_view_no_data)
+        systemArticleAdapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+                val dts: MutableList<SystemArticleModel.Data> =
+                    adapter.data as MutableList<SystemArticleModel.Data> ?: return
+                val dt: SystemArticleModel.Data = dts[position] ?: return
+                WebViewActivity.actionStart(activity!!, dt.link, dt.title)
+            }
+        })
 
     }
 

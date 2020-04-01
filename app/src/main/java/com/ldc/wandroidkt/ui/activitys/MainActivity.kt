@@ -1,5 +1,6 @@
 package com.ldc.wandroidkt.ui.activitys
 
+import android.annotation.SuppressLint
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.blankj.utilcode.util.ToastUtils
@@ -13,6 +14,7 @@ import com.ldc.wandroidkt.ui.fragments.HomeFragment
 import com.ldc.wandroidkt.ui.fragments.ProjectFragment
 import com.ldc.wandroidkt.ui.fragments.SystemFragment
 import com.ldc.wandroidkt.ui.fragments.WXNumberFragment
+import com.yanzhenjie.permission.AndPermission
 import me.yokeyword.fragmentation.SupportFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainContract.V {
@@ -33,9 +35,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
         return MainPresenter(this)
     }
 
+    @SuppressLint("WrongConstant")
     override fun init_view() {
         init_fragment()
         init_bottomNavigationBar()
+
+        AndPermission.with(activity).runtime()
+            .permission(android.Manifest.permission.ACCESS_NETWORK_STATE).start()
     }
 
     override fun init_data() {

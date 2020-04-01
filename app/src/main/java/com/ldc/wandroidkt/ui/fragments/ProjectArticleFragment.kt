@@ -4,23 +4,20 @@ import android.os.Handler
 import android.os.Message
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.blankj.utilcode.util.ApiUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.ProjectArticleAdapter
-import com.ldc.wandroidkt.adapter.WXNumberArticleAdapter
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.ProjectArticleContract
-import com.ldc.wandroidkt.contract.WXNumberArticleContract
 import com.ldc.wandroidkt.core.BaseFragment
 import com.ldc.wandroidkt.databinding.FragmentProjectArticleBinding
-import com.ldc.wandroidkt.databinding.FragmentWxNumberArticleBinding
 import com.ldc.wandroidkt.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.ProjectArticleModel
-import com.ldc.wandroidkt.model.WxNumberArticleModel
 import com.ldc.wandroidkt.presenter.ProjectArticlePresenter
-import com.ldc.wandroidkt.presenter.WXNumberArticlePresenter
+import com.ldc.wandroidkt.ui.activitys.WebViewActivity
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
@@ -38,7 +35,7 @@ class ProjectArticleFragment :
     @Volatile
     private var curr_name: String = ""
     //
-    private val wxNumberArticleAdapter: ProjectArticleAdapter = ProjectArticleAdapter()
+    private val projectArticleAdapter: ProjectArticleAdapter = ProjectArticleAdapter()
     //
     private val refresh_code: Int = 0x00
     private var uiHandler: Handler = Handler(Handler.Callback { msg ->
@@ -47,9 +44,9 @@ class ProjectArticleFragment :
                 val dts: MutableList<ProjectArticleModel.Data> =
                     msg.obj as MutableList<ProjectArticleModel.Data>
                 if (1 == curr_idnex) {
-                    wxNumberArticleAdapter.setNewData(dts)
+                    projectArticleAdapter.setNewData(dts)
                 } else {
-                    wxNumberArticleAdapter.addData(dts)
+                    projectArticleAdapter.addData(dts)
                 }
 
                 return@Callback true
@@ -149,7 +146,16 @@ class ProjectArticleFragment :
     private fun init_adapter() {
         mBinding.dataList.setItemViewCacheSize(10)
         mBinding.dataList.setHasFixedSize(true)
-        mBinding.dataList.adapter = wxNumberArticleAdapter
+        mBinding.dataList.adapter = projectArticleAdapter
+        projectArticleAdapter.setEmptyView(R.layout.layout_view_no_data)
+        projectArticleAdapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+                val dts: MutableList<ProjectArticleModel.Data> =
+                    adapter.data as MutableList<ProjectArticleModel.Data> ?: return
+                val dt: ProjectArticleModel.Data = dts[position] ?: return
+                WebViewActivity.actionStart(activity!!, dt.link, dt.title)
+            }
+        })
 
     }
 

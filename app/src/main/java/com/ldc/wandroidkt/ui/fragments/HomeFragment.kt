@@ -202,7 +202,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                 val dts: MutableList<HomeArticleModel.Data> =
                     adapter.data as MutableList<HomeArticleModel.Data> ?: return
                 val dt: HomeArticleModel.Data = dts[position] ?: return
-                WebViewActivity.actionStart(activity!!, dt.link, dt.chapterName)
+                WebViewActivity.actionStart(activity!!, dt.link, dt.title)
             }
         })
 

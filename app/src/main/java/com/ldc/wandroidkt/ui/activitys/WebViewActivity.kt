@@ -1,19 +1,25 @@
 package com.ldc.wandroidkt.ui.activitys
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import com.blankj.utilcode.util.ToastUtils
+import com.just.agentweb.AgentWeb
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.WebViewContract
 import com.ldc.wandroidkt.core.BaseActivity
 import com.ldc.wandroidkt.databinding.ActivityWebViewBinding
 import com.ldc.wandroidkt.presenter.WebViewPresenter
+import com.yanzhenjie.permission.AndPermission
 
 class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>(),
     WebViewContract.V {
 
+    private lateinit var mAgentWeb: AgentWeb
 
     companion object {
         @Volatile
@@ -31,6 +37,26 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>()
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        init_web()
+    }
+
+    override fun onResume() {
+        mAgentWeb.webLifeCycle.onResume()
+        super.onResume()
+    }
+
+    override fun onPause() {
+        mAgentWeb.webLifeCycle.onPause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        mAgentWeb.webLifeCycle.onDestroy()
+        super.onDestroy()
+    }
+
 
     override fun ui(): Int {
         return R.layout.activity_web_view
@@ -42,10 +68,14 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>()
 
     override fun init_view() {
         mBinding.eventListener = EventListener()
+        show_toast(strName)
 
     }
 
+    @SuppressLint("WrongConstant")
     override fun init_data() {
+        AndPermission.with(activity).runtime()
+            .permission(android.Manifest.permission.ACCESS_NETWORK_STATE).start()
 
     }
 
@@ -80,6 +110,21 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>()
         fun onBack(v: View) {
             finish()
         }
+    }
+
+
+    // 初始化web
+    private fun init_web() {
+        mAgentWeb = AgentWeb.with(this)
+            .setAgentWebParent(
+                mBinding.lineWebView as LinearLayout,
+                LinearLayout.LayoutParams(-1, -1)
+            )
+            .useDefaultIndicator()
+            .createAgentWeb()
+            .ready()
+            .go(strLink);
+
     }
 
 

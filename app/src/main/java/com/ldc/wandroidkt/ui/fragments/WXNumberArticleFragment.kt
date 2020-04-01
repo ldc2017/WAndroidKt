@@ -4,8 +4,9 @@ import android.os.Handler
 import android.os.Message
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.blankj.utilcode.util.ApiUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.WXNumberArticleAdapter
 import com.ldc.wandroidkt.commom.cmConstants
@@ -16,6 +17,7 @@ import com.ldc.wandroidkt.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.WxNumberArticleModel
 import com.ldc.wandroidkt.presenter.WXNumberArticlePresenter
+import com.ldc.wandroidkt.ui.activitys.WebViewActivity
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 
@@ -148,6 +150,15 @@ class WXNumberArticleFragment :
         mBinding.dataList.setItemViewCacheSize(10)
         mBinding.dataList.setHasFixedSize(true)
         mBinding.dataList.adapter = wxNumberArticleAdapter
+        wxNumberArticleAdapter.setEmptyView(R.layout.layout_view_no_data)
+        wxNumberArticleAdapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+                val dts: MutableList<WxNumberArticleModel.Data> =
+                    adapter.data as MutableList<WxNumberArticleModel.Data> ?: return
+                val dt: WxNumberArticleModel.Data = dts[position] ?: return
+                WebViewActivity.actionStart(activity!!, dt.link, dt.title)
+            }
+        })
 
     }
 
