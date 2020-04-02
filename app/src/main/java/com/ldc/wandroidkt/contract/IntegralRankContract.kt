@@ -1,10 +1,16 @@
 package com.ldc.wandroidkt.contract
 
 import com.ldc.wandroidkt.core.IView
+import com.ldc.wandroidkt.model.BaseModel
+import com.ldc.wandroidkt.model.IntegralRankModel
 
 interface IntegralRankContract {
 
-    interface V : IView {}
+    interface V : IView {
+        fun get_integral_rank_resp(dt: BaseModel<IntegralRankModel>)
+    }
 
-    interface P {}
+    interface P {
+        fun get_integral_rank_req(index: Int = 1)
+    }
 }

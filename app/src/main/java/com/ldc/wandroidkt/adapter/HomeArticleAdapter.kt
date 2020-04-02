@@ -19,7 +19,7 @@ class HomeArticleAdapter :
     val TAG: String = HomeArticleAdapter::class.java.name
 
     override fun convert(helper: BaseViewHolder, modelItem: HomeArticleModel.Data) {
-
+        modelItem ?: return
         //描述
         val str_html = HtmlCompat.fromHtml(modelItem.desc, HtmlCompat.FROM_HTML_MODE_COMPACT)
         //事件
@@ -27,7 +27,7 @@ class HomeArticleAdapter :
         helper.setText(R.id.tv_title, modelItem.chapterName)
             .setText(R.id.tv_content, modelItem.title + str_html)
             .setText(R.id.tv_time_author, modelItem.author + " " + modelItem.niceShareDate)
-        val ck: AppCompatCheckBox = helper.getView(R.id.ck_favorite)
+        val ck: AppCompatCheckBox = helper.getView<AppCompatCheckBox>(R.id.ck_favorite)
         ck.isChecked = modelItem.collect
         //
         Log.e(TAG, "----图片:" + modelItem.envelopePic)

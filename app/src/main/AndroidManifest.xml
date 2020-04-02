@@ -23,7 +23,7 @@
             android:name=".ui.activitys.IntegralRankActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".ui.activitys.PersonalIntegralActivity"
+            android:name=".ui.activitys.PersonalIntegralListActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".ui.activitys.LoginActivity"

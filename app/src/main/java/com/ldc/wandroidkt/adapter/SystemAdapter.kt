@@ -1,7 +1,6 @@
 package com.ldc.wandroidkt.adapter
 
 import android.view.View
-import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.donkingliang.labels.LabelsView
@@ -22,6 +21,7 @@ class SystemAdapter :
     }
 
     override fun convert(helper: BaseViewHolder, item: SystemModel.SystemModelItem) {
+        item ?: return
         helper.setText(R.id.tv_title, item.name)
         helper.getView<LabelsView>(R.id.label_view).apply {
             setLabels(item.children) { _, _, data ->

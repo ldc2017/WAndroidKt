@@ -3,27 +3,20 @@ package com.ldc.wandroidkt.ui.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.ToastUtils
-
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.ProjectAdapter
-import com.ldc.wandroidkt.adapter.WxNumberAdapter
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.ProjectContract
 import com.ldc.wandroidkt.core.BaseFragment
-import com.ldc.wandroidkt.core.IView
 import com.ldc.wandroidkt.databinding.FragmentProjectBinding
 import com.ldc.wandroidkt.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.ProjectModel
-import com.ldc.wandroidkt.model.WXNumberModelItem
 import com.ldc.wandroidkt.presenter.ProjectPresenter
 import me.yokeyword.fragmentation.SupportFragment
-import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass.
@@ -85,7 +78,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectPresenter>()
             message.obj = dts.data
             uiHandler.sendMessage(message)
         } else {
-            show_toast(dts.msg)
+            show_toast(dts.errorMsg)
         }
 
     }

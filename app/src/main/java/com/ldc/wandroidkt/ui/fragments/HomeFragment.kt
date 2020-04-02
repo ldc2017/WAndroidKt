@@ -137,7 +137,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             message.obj = dts.data
             uiHandler.sendMessage(message)
         } else
-            show_toast(dts.msg)
+            show_toast(dts.errorMsg)
 
     }
 
@@ -147,7 +147,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             message.obj = dts.data!!.datas
             uiHandler.sendMessage(message)
         } else {
-            show_toast(dts.msg)
+            show_toast(dts.errorMsg)
         }
 
     }

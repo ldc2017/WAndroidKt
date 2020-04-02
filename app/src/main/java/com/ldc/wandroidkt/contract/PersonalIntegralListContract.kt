@@ -2,7 +2,7 @@ package com.ldc.wandroidkt.contract
 
 import com.ldc.wandroidkt.core.IView
 
-interface PersonalIntegralContract {
+interface PersonalIntegralListContract {
 
     interface V : IView {}
 

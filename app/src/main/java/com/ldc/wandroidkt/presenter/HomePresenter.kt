@@ -46,7 +46,7 @@ open class HomePresenter(v: HomeContract.V) : BasePresenter<HomeContract.V>(v),
     override fun get_home_article(index: Int) {
 
         getView().show_loading("加载数据···")
-        apiServer!!.get_home_article(index)
+        apiServer.get_home_article(index)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<BaseModel<HomeArticleModel>> {

@@ -3,6 +3,7 @@ package com.ldc.wandroidkt.ui.activitys
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.os.Handler
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +17,9 @@ import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.MainContract
 import com.ldc.wandroidkt.core.BaseActivity
 import com.ldc.wandroidkt.databinding.ActivityMainBinding
+import com.ldc.wandroidkt.http.Api
+import com.ldc.wandroidkt.model.BaseModel
+import com.ldc.wandroidkt.model.PersonalIntegralModel
 import com.ldc.wandroidkt.presenter.MainPresenter
 import com.ldc.wandroidkt.ui.fragments.HomeFragment
 import com.ldc.wandroidkt.ui.fragments.ProjectFragment
@@ -34,6 +38,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
             act.overridePendingTransition(0, 0)
         }
     }
+
+    private val refresh_code: Int = 0x00
+    private val uiHandler: Handler = Handler(Handler.Callback { msg -> false })
 
     //
     private lateinit var drawerToggle: ActionBarDrawerToggle
@@ -76,6 +83,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
 
     override fun init_data() {
 
+    }
+
+    override fun get_personal_integral_resp(dt: BaseModel<PersonalIntegralModel>) {
+        dt ?: return
+        if (Api.error_code_success == dt.errorCode) {
+            val message = uiHandler.obtainMessage(refresh_code)
+            message.obj = dt.data
+            uiHandler.sendMessage(message)
+        } else show_toast(dt.errorMsg)
     }
 
     override fun show_toast(str_message: String?) {
@@ -129,11 +145,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
             R.string.close_drawer
         ) {
             override fun onDrawerOpened(drawerView: View) {
+                mPresenter.get_personal_integral_req()//获取个人积分
                 super.onDrawerOpened(drawerView)
+                print("打开抽屉")
             }
 
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
+                print("关闭抽屉")
             }
         }
         drawerToggle.syncState()
@@ -206,7 +225,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                 mBinding.drawerLayout.closeDrawer(Gravity.START)
                 when (item.itemId) {
                     R.id.item_personal_integral -> {
-                        PersonalIntegralActivity.actionStart(activity!!)
+                        PersonalIntegralListActivity.actionStart(activity!!)
                         return true
                     }
                     R.id.item_integral_rank -> {

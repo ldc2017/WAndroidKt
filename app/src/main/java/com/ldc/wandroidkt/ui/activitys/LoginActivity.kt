@@ -66,7 +66,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
             val message = uiHandler.obtainMessage(refresh_code)
             message.obj = dt.data
             uiHandler.sendMessage(message)
-        } else show_toast(dt.msg)
+        } else show_toast(dt.errorMsg)
     }
 
     override fun show_toast(str_message: String?) {

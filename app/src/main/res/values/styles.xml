@@ -28,5 +28,6 @@
 
     <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorControlNormal">@color/color_ffffff</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 </resources>

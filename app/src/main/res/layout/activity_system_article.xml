@@ -24,13 +24,15 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tool_bar"
-                android:background="@color/color_ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
-                app:contentInsetStartWithNavigation="@dimen/dp_10"
-                app:titleTextColor="@color/color_222222"
+                android:layout_alignParentTop="true"
+                android:background="?attr/colorPrimaryDark"
                 android:fitsSystemWindows="true"
-                android:layout_alignParentTop="true" />
+                android:theme="@style/toolbar_theme"
+                app:contentInsetStartWithNavigation="@dimen/dp_10"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleTextColor="@color/color_ffffff" />
 
             <com.scwang.smart.refresh.layout.SmartRefreshLayout
                 android:id="@+id/refresh_view"

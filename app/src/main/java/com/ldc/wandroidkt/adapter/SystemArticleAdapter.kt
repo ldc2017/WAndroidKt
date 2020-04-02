@@ -19,7 +19,7 @@ class SystemArticleAdapter :
     val TAG: String = SystemArticleAdapter::class.java.name
 
     override fun convert(helper: BaseViewHolder, item: SystemArticleModel.Data) {
-
+        item ?: return
         //描述
         val str_html = HtmlCompat.fromHtml(item.desc, HtmlCompat.FROM_HTML_MODE_COMPACT)
         //事件

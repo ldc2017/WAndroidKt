@@ -101,7 +101,7 @@ class WXNumberArticleFragment :
             val message: Message = uiHandler.obtainMessage(refresh_code)
             message.obj = dts.data!!.datas
             uiHandler.sendMessage(message)
-        } else show_toast(dts.msg)
+        } else show_toast(dts.errorMsg)
 
     }
 

@@ -77,7 +77,7 @@ class WXNumberFragment : BaseFragment<FragmentWxNumberBinding, WXNumberPresenter
             val message: Message = uiHandler.obtainMessage(refresh_code)
             message.obj = dts.data
             uiHandler.sendMessage(message)
-        } else show_toast(dts.msg)
+        } else show_toast(dts.errorMsg)
     }
 
     override fun show_toast(str_message: String?) {

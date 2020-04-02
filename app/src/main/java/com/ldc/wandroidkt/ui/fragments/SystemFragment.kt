@@ -1,13 +1,9 @@
 package com.ldc.wandroidkt.ui.fragments
 
-import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.ToastUtils
-
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.SystemAdapter
 import com.ldc.wandroidkt.commom.cmConstants
@@ -17,7 +13,6 @@ import com.ldc.wandroidkt.databinding.FragmentSystemBinding
 import com.ldc.wandroidkt.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.SystemModel
-import com.ldc.wandroidkt.presenter.ProjectPresenter
 import com.ldc.wandroidkt.presenter.SystemPresenter
 import com.ldc.wandroidkt.ui.activitys.SystemArticleActivity
 
@@ -77,7 +72,7 @@ class SystemFragment : BaseFragment<FragmentSystemBinding, SystemPresenter>(), S
             val message = uiHandler.obtainMessage(refresh_code)
             message.obj = dts.data
             uiHandler.sendMessage(message)
-        } else show_toast(dts.msg)
+        } else show_toast(dts.errorMsg)
 
 
     }
