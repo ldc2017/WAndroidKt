@@ -29,6 +29,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
                 SPUtils.getInstance().put(cmConstants.user_name, curr_user_name)
                 SPUtils.getInstance().put(cmConstants.user_password, curr_user_password)
                 MainActivity.actionStart(activity!!)
+                finish()
 
                 return@Callback true
             }

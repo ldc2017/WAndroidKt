@@ -15,6 +15,7 @@ object Api2Request {
     //客户端
     private val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
+        .addInterceptor(RequestLogStatusInterceptor())//检测是否登录
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(35, TimeUnit.SECONDS)
         .addInterceptor(netLog())

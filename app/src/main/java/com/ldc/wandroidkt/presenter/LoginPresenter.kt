@@ -34,7 +34,7 @@ class LoginPresenter constructor(v: LoginContract.V) : BasePresenter<LoginContra
                 }
 
                 override fun onNext(t: BaseModel<LoginModel>) {
-
+                    getView().login_resp(t)
                 }
 
                 override fun onError(e: Throwable) {
