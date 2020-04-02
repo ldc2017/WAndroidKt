@@ -3,9 +3,14 @@ package com.ldc.wandroidkt.ui.activitys
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.view.Gravity
+import android.view.MenuItem
+import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.blankj.utilcode.util.ToastUtils
+import com.google.android.material.navigation.NavigationView
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.MainContract
@@ -30,10 +35,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
         }
     }
 
+    //
+    private lateinit var drawerToggle: ActionBarDrawerToggle
+
+    //
     private val tabs: Array<String> = arrayOf<String>("首页", "项目", "体系", "公众号")
     private val fragments: Array<SupportFragment?> = arrayOfNulls<SupportFragment>(tabs.size)
     @Volatile
-    private var curr_selected_position = 0
+    private var curr_selected_position: Int = 0
     @Volatile
     private var curr_fragment: SupportFragment? = null
 
@@ -55,6 +64,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
 
         AndPermission.with(activity).runtime()
             .permission(android.Manifest.permission.ACCESS_NETWORK_STATE).start()
+        //
+        mBinding.navigationView.itemIconTintList = null
+        mBinding.navigationView.setNavigationItemSelectedListener(navItemSelectedListener)
+        //
+        setSupportActionBar(mBinding.mainContent.toolBar)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        init_drawer()
     }
 
     override fun init_data() {
@@ -85,8 +102,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
 
     //初始化tabs
     fun init_bottomNavigationBar() {
+        mBinding.mainContent.toolBar.title = tabs[curr_selected_position]
         //
-        mBinding.bottomNavigationBar
+        mBinding.mainContent.bottomNavigationBar
             .addItem(BottomNavigationItem(R.drawable.icon_home, tabs[0]))
             .addItem(BottomNavigationItem(R.drawable.icon_project, tabs[1]))
             .addItem(BottomNavigationItem(R.drawable.icon_system, tabs[2]))
@@ -96,9 +114,30 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
             .setBarBackgroundColor(R.color.color_f00)
             .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
             .setMode(BottomNavigationBar.MODE_FIXED)
-            .setFirstSelectedPosition(0)
+            .setFirstSelectedPosition(curr_selected_position)
             .setTabSelectedListener(onTabSelectedListener)
             .initialise()
+    }
+
+    //初始化侧滑
+    private fun init_drawer() {
+        drawerToggle = object : ActionBarDrawerToggle(
+            this,
+            mBinding.drawerLayout,
+            mBinding.mainContent.toolBar,
+            R.string.open_drawer,
+            R.string.close_drawer
+        ) {
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+            }
+        }
+        drawerToggle.syncState()
+        mBinding.drawerLayout.addDrawerListener(drawerToggle)
     }
 
     //加载fragment
@@ -112,7 +151,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                 fragments[3] = WXNumberFragment()
 
                 loadMultipleRootFragment(
-                    mBinding.fragmentContainer.id, 0,
+                    mBinding.mainContent.fragmentContainer.id, 0,
                     fragments[0],
                     fragments[1],
                     fragments[2],
@@ -142,6 +181,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
         }
 
         override fun onTabSelected(position: Int) {
+            mBinding.mainContent.toolBar.title = tabs[position]
             switch_fragment(position)
         }
     }
@@ -157,4 +197,41 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
         curr_selected_position = position;
         curr_fragment = newFragment;
     }
+
+    //侧边栏点击事件
+    private val navItemSelectedListener: NavigationView.OnNavigationItemSelectedListener =
+        object : NavigationView.OnNavigationItemSelectedListener {
+            @SuppressLint("WrongConstant")
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                mBinding.drawerLayout.closeDrawer(Gravity.START)
+                when (item.itemId) {
+                    R.id.item_personal_integral -> {
+                        PersonalIntegralActivity.actionStart(activity!!)
+                        return true
+                    }
+                    R.id.item_integral_rank -> {
+                        IntegralRankActivity.actionStart(activity!!)
+                        return true
+                    }
+                    R.id.item_my_favorite -> {
+                        MyFavoriteActivity.actionStart(activity!!)
+                        return true
+                    }
+                    R.id.item_search -> {
+                        ArticleSearchActivity.actionStart(activity!!)
+                        return true
+                    }
+                    R.id.item_about_author -> {
+                        show_toast("作者")
+                        return true
+                    }
+                    R.id.item_about_app -> {
+                        show_toast("关于程序")
+                        return true
+                    }
+                }
+                return false
+            }
+
+        }
 }

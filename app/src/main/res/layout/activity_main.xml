@@ -7,26 +7,27 @@
 
     </data>
 
-    <RelativeLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:context=".ui.activitys.MainActivity">
 
-
-        <FrameLayout
-            android:id="@+id/fragmentContainer"
+        <include
+            android:id="@+id/main_content"
+            layout="@layout/activity_main_content"
             android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view"
+            android:background="@drawable/login_bg"
+            android:layout_width="@dimen/dp_250"
             android:layout_height="match_parent"
-            android:layout_above="@id/bottom_navigation_bar" />
+            android:layout_gravity="start"
+            app:headerLayout="@layout/activity_main_head"
+            app:menu="@menu/main_left_menu" />
 
-        <com.ashokvarma.bottomnavigation.BottomNavigationBar
-            android:id="@+id/bottom_navigation_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
-            app:bnbBackgroundStyle="background_style_ripple" />
-
-    </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

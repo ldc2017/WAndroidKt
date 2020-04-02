@@ -21,4 +21,5 @@
     <dimen name="dp_24">24dp</dimen>
     <dimen name="dp_48">48dp</dimen>
     <dimen name="sp_20">20sp</dimen>
+    <dimen name="dp_120">120dp</dimen>
 </resources>

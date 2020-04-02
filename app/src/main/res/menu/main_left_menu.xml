@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_personal_integral"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/str_personal_integral"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_integral_rank"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/str_integral_rank"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_my_favorite"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/str_my_favorite"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item_search"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/str_search"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_about_author"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/str_about_author"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_about_app"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/str_about_app"
+        android:visible="true"
+        app:showAsAction="never" />
+
+</menu>
