@@ -41,6 +41,7 @@ class SystemArticleActivity : BaseActivity<ActivitySystemArticleBinding, SystemA
             curr_name = name
             val intent = Intent(activity, SystemArticleActivity::class.java)
             activity.startActivity(intent)
+            activity.overridePendingTransition(0, 0)
         }
     }
 

@@ -33,6 +33,7 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>()
             strName = curr_name
             val intent = Intent(act, WebViewActivity::class.java)
             act.startActivity(intent)
+            act.overridePendingTransition(0, 0)
         }
 
     }

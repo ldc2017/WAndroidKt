@@ -55,7 +55,8 @@
                             android:focusable="true"
                             android:focusableInTouchMode="true"
                             app:indicator_gravity="center"
-                            app:layout_collapseMode="pin" />
+                            app:layout_collapseMode="parallax"
+                            app:layout_collapseParallaxMultiplier="0.99999" />
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -63,7 +64,7 @@
                             android:background="@android:color/transparent"
                             android:contentDescription="@string/str_title"
                             android:scaleType="centerCrop"
-                            app:layout_collapseMode="parallax"
+                            app:layout_collapseMode="pin"
                             app:layout_collapseParallaxMultiplier="0.1" />
 
                     </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -26,6 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
         fun actionStart(act: Activity) {
             val intent = Intent(act, MainActivity::class.java)
             act.startActivity(intent)
+            act.overridePendingTransition(0, 0)
         }
     }
 
