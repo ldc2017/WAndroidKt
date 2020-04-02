@@ -10,13 +10,13 @@
 
 
     <style name="tablayout_style" parent="android:Widget">
-        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabIndicatorColor">@color/color_f00</item>
         <item name="tabIndicatorHeight">2dp</item>
         <item name="tabPaddingStart">12dp</item>
         <item name="tabPaddingEnd">12dp</item>
-        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabSelectedTextColor">@color/color_f00</item>
+        <item name="tabTextColor">@color/color_aaa</item>
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
-        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
 
 
@@ -25,7 +25,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/color_ffffff</item>
+    </style>
 </resources>

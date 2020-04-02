@@ -14,10 +14,13 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="@color/color_ffffff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"/>
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimaryDark"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:theme="@style/toolbar_theme" />
 
         <FrameLayout
             android:id="@+id/fragmentContainer"
