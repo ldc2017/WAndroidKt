@@ -2,12 +2,15 @@ package com.ldc.wandroidkt.ui.activitys
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Handler
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.blankj.utilcode.util.ToastUtils
@@ -32,15 +35,30 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
 
 
     companion object {
-        fun actionStart(act: Activity) {
+        fun actionStart(act: Activity, requestCode: Int = 0x000) {
             val intent = Intent(act, MainActivity::class.java)
-            act.startActivity(intent)
+            act.startActivityForResult(intent, requestCode)
             act.overridePendingTransition(0, 0)
         }
     }
 
-    private val refresh_code: Int = 0x00
-    private val uiHandler: Handler = Handler(Handler.Callback { msg -> false })
+    private val refresh_code: Int = 0x000
+    private val uiHandler: Handler = Handler(Handler.Callback { msg ->
+        when (msg.what) {
+            refresh_code -> {
+                val dt: PersonalIntegralModel = msg.obj as PersonalIntegralModel
+                dt ?: return@Callback false
+                mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_rank).text =
+                    "排名:${dt.rank}"
+                mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_coinCount).text =
+                    "积分:${dt.coinCount}"
+
+                return@Callback true
+            }
+        }
+
+        false
+    })
 
     //
     private lateinit var drawerToggle: ActionBarDrawerToggle
@@ -82,6 +100,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
     }
 
     override fun init_data() {
+
+        mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_user_name).text =
+            cmConstants.get_user_username()
 
     }
 
@@ -237,7 +258,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                         return true
                     }
                     R.id.item_search -> {
-                        ArticleSearchActivity.actionStart(activity!!)
+                        show_toast("敬请期待")
+                        // ArticleSearchActivity.actionStart(activity!!)
                         return true
                     }
                     R.id.item_about_author -> {
@@ -251,6 +273,41 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                 }
                 return false
             }
-
         }
+
+
+    @Volatile
+    private var last_time: Long = 0L
+
+    override fun onBackPressedSupport() {
+        val curr_time = System.currentTimeMillis()
+        if (curr_time - last_time > 2000) {
+            show_toast("再点一次退出程序")
+            last_time = curr_time
+        } else {
+            last_time = 0
+            showDialog()
+        }
+    }
+
+
+    private fun showDialog() {
+        val items: Array<String> = arrayOf("切换账号", "退出程序", "取消操作")
+        val dialog: AlertDialog.Builder = AlertDialog.Builder(this)
+        dialog.setTitle("操作")
+        dialog.setItems(items, object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                when (which) {
+                    0 -> {
+                        LoginActivity.actionStart(activity!!)
+                        finish()
+                    }
+                    1 -> finish()
+                }
+
+            }
+        })
+        dialog.create()
+        dialog.show()
+    }
 }

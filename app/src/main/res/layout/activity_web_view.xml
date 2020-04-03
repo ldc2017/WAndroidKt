@@ -16,11 +16,10 @@
 
         <FrameLayout
             android:id="@+id/fl_back"
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_40"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
             android:layout_gravity="center_vertical|right"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginEnd="@dimen/dp_20"
             android:background="@drawable/round_bg"
             android:elevation="@dimen/dp_10"
             android:onClick="@{(v)->eventListener.onBack(v)}">
@@ -29,7 +28,7 @@
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
                 android:layout_gravity="center"
-                android:scaleType="centerCrop"
+                android:scaleType="centerInside"
                 android:src="@drawable/icon_back" />
         </FrameLayout>
 

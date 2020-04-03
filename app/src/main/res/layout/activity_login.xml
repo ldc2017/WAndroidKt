@@ -12,88 +12,101 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_bg"
         tools:context=".ui.activitys.ui.login.LoginActivity">
 
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="@dimen/dp_150"
-            android:layout_height="@dimen/dp_150"
-            android:layout_marginTop="@dimen/dp_50"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/icon_user"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:riv_border_color="@color/colorPrimaryDark"
-            app:riv_border_width="@dimen/dp_2"
-            app:riv_oval="true" />
-
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_24"
-            android:layout_marginTop="228dp"
-            android:layout_marginEnd="@dimen/dp_24"
-            android:hint="@string/str_account"
-            android:inputType="textEmailAddress"
-            android:selectAllOnFocus="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_24"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="@dimen/dp_24"
-            android:hint="@string/prompt_password"
-            android:imeActionLabel="@string/str_password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:selectAllOnFocus="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username" />
-
-        <Button
-            android:id="@+id/login"
+        <include
+            android:id="@+id/layout_welcome"
+            layout="@layout/layout_view_welcome"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="@dimen/dp_48"
-            android:layout_marginEnd="@dimen/dp_48"
-            android:background="@drawable/btn_bg"
-            android:onClick="@{(v)->eventListener.login(v)}"
-            android:text="@string/str_login"
-            android:textColor="@color/color_ffffff"
-            android:textSize="@dimen/sp_20"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
-
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="@dimen/dp_80"
-            android:layout_height="@dimen/dp_80"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintStart_toStartOf="@+id/password"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
             tools:visibility="visible" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_bg">
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="@dimen/dp_150"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_80"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/icon_user"
+                app:riv_border_color="@color/color_ffffff"
+                app:riv_border_width="@dimen/dp_2"
+                app:riv_oval="true" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_icon"
+                android:layout_marginStart="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginEnd="@dimen/dp_40"
+                android:hint="@string/str_account"
+                android:inputType="textEmailAddress"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/username"
+                android:layout_marginStart="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_40"
+                android:hint="@string/prompt_password"
+                android:imeActionLabel="@string/str_password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true" />
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="start"
+                android:layout_marginStart="@dimen/dp_48"
+                android:layout_marginEnd="@dimen/dp_48"
+                android:layout_marginBottom="@dimen/dp_100"
+                android:background="@drawable/btn_bg"
+                android:onClick="@{(v)->eventListener.login(v)}"
+                android:text="@string/str_login"
+                android:textColor="@color/color_ffffff"
+                android:textSize="@dimen/sp_20" />
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:onClick="@{(v)->eventListener.register(v)}"
+                android:text="@string/str_register"
+                android:textColor="@color/color_222222"
+                android:textSize="@dimen/sp_15"
+                tools:ignore="RelativeOverlap" />
+        </RelativeLayout>
+    </FrameLayout>
 </layout>

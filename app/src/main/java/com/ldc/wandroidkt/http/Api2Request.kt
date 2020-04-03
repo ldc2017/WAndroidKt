@@ -18,6 +18,7 @@ object Api2Request {
         .addInterceptor(RequestLogStatusInterceptor())//检测是否登录
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(35, TimeUnit.SECONDS)
+        .cookieJar(ApiCookie())//记录登录cookie
         .addInterceptor(netLog())
         .build()
 

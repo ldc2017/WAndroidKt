@@ -12,34 +12,34 @@ interface ApiServer {
 
     //获取首页banner
     @GET(value = "/banner/json")
-     fun get_banner(): Observable<BaseModel<BannerModel>>
+    fun get_banner(): Observable<BaseModel<BannerModel>>
 
 
     //获取首页文章
     @GET(value = "/article/list/{index}/json")
-     fun get_home_article(
+    fun get_home_article(
         @Path(value = "index") index: Int = 0
     ): Observable<BaseModel<HomeArticleModel>>
 
     //获取微信公众号
     @GET(value = "/wxarticle/chapters/json")
-     fun get_wx_number(): Observable<BaseModel<WXNumberModel>>
+    fun get_wx_number(): Observable<BaseModel<WXNumberModel>>
 
 
     //回去公众号列表
     @GET(value = "/wxarticle/list/{number}/{index}/json")
-     fun get_wx_number_list(
+    fun get_wx_number_list(
         @Path(value = "number") number: String,
         @Path(value = "index") index: Int = 1
     ): Observable<BaseModel<WxNumberArticleModel>>
 
     //获取项目
     @GET(value = "/project/tree/json")
-     fun get_project(): Observable<BaseModel<ProjectModel>>
+    fun get_project(): Observable<BaseModel<ProjectModel>>
 
     //获取项目文章
     @GET(value = "/project/list/{index}/json")
-     fun get_project_article(
+    fun get_project_article(
         @Path(value = "index") index: Int = 1,
         @Query(value = "cid") cid: String
     ): Observable<BaseModel<ProjectArticleModel>>
@@ -47,31 +47,44 @@ interface ApiServer {
 
     //获取体系
     @GET(value = "/tree/json")
-     fun get_system(): Observable<BaseModel<SystemModel>>
+    fun get_system(): Observable<BaseModel<SystemModel>>
 
     //获取体系文章
     @GET(value = "/article/list/{index}/json")
-     fun get_system_article(
+    fun get_system_article(
         @Path(value = "index") index: Int = 0,
         @Query(value = "cid") cid: String
     ): Observable<BaseModel<SystemArticleModel>>
 
     //登录
     @POST(value = "/user/login")
-     fun login(
+    fun login(
         @Query(value = "username") user_name: String = "",
         @Query(value = "password") password: String = ""
     ): Observable<BaseModel<LoginModel>>
 
     //积分排名
     @GET(value = "/coin/rank/{index}/json")
-     fun get_integral_rank(
+    fun get_integral_rank(
         @Path(value = "index") index: Int = 1
     ): Observable<BaseModel<IntegralRankModel>>
 
     //个人积分
     @GET(value = "/lg/coin/userinfo/json")
-     fun get_personal_integral(): Observable<BaseModel<PersonalIntegralModel>>
+    fun get_personal_integral(): Observable<BaseModel<PersonalIntegralModel>>
+
+    //个人积分列表
+    @GET(value = "/lg/coin/list/{index}/json")
+    fun get_personal_integral_list(
+        @Path(value = "index") index: Int = 1
+    ): Observable<BaseModel<PersonalIntegralListModel>>
+
+
+    //收藏文章列表
+    @GET(value = "/lg/collect/list/{index}/json")
+    fun get_collect_article_list(
+        @Path(value = "index") index: Int = 0
+    ):Observable<BaseModel<FavoriteArticleListModel>>
 
 
 }

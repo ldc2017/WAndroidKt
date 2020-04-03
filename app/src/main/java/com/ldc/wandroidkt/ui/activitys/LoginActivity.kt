@@ -1,5 +1,7 @@
 package com.ldc.wandroidkt.ui.activitys
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Handler
 import android.text.TextUtils
 import android.view.View
@@ -18,19 +20,34 @@ import com.ldc.wandroidkt.presenter.LoginPresenter
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), LoginContract.V {
 
 
+    companion object {
+        fun actionStart(activity: Activity) {
+            SPUtils.getInstance().clear()
+            val intent = Intent(activity, LoginActivity::class.java)
+            activity.startActivity(intent)
+            activity.overridePendingTransition(0, 0)
+        }
+    }
+
     lateinit var curr_user_name: String
     lateinit var curr_user_password: String
     private val refresh_code: Int = 0x000
+    private val check_login_code = 0x001
     private val uiHandler: Handler = Handler(Handler.Callback { msg ->
         when (msg.what) {
             refresh_code -> {
                 val dt: LoginModel = msg.obj as LoginModel
                 dt ?: return@Callback false
+                cmConstants.saveUserinfo(dt)//保存数据
                 SPUtils.getInstance().put(cmConstants.user_name, curr_user_name)
                 SPUtils.getInstance().put(cmConstants.user_password, curr_user_password)
-                MainActivity.actionStart(activity!!)
-                finish()
+                MainActivity.actionStart(activity!!, refresh_code)
 
+                return@Callback true
+            }
+            check_login_code -> {
+
+                checkLogin()
                 return@Callback true
             }
         }
@@ -55,6 +72,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
 
     override fun init_view() {
         mBinding.eventListener = EventListener()
+        //
+        mBinding.layoutWelcome.visibility = View.VISIBLE
+        mBinding.layoutLogin.visibility = View.GONE
+        uiHandler.postDelayed({
+            uiHandler.sendEmptyMessage(check_login_code)
+        }, 2000)
 
     }
 
@@ -96,6 +119,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
         return cmConstants.SizeInDp
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == refresh_code) {
+                finish()
+            }
+        }
+    }
+
 
     //点击事件
     inner class EventListener {
@@ -108,9 +140,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
                 mPresenter.login_req(curr_user_name, curr_user_password)
 
             } else show_toast("账号或密码不能合法~~~")
+        }
 
+        //注册
+        fun register(v: View) {
+            show_toast("敬请期待")
         }
     }
 
+
+    //检测是否登录
+    private fun checkLogin() {
+        curr_user_name = SPUtils.getInstance().getString(cmConstants.user_name)
+        curr_user_password = SPUtils.getInstance().getString(cmConstants.user_password)
+        if (!TextUtils.isEmpty(curr_user_name) && !TextUtils.isEmpty(curr_user_password)) {
+            mPresenter.login_req(curr_user_name, curr_user_password)
+        } else {
+            mBinding.layoutWelcome.visibility = View.GONE
+            mBinding.layoutLogin.visibility = View.VISIBLE
+        }
+    }
 
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_welcome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_item_1"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="@dimen/dp_150"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_120"
+        android:src="@mipmap/icon_user"
+        app:riv_border_color="@color/color_ffffff"
+        app:riv_border_width="@dimen/dp_2"
+        app:riv_oval="true" />
+
+    <TextView
+        android:id="@+id/tv_item_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_item_1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="@string/str_welcome_title_1"
+        android:textColor="@color/color_f00"
+        android:textSize="@dimen/sp_20" />
+
+    <TextView
+        android:id="@+id/tv_item_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:text="@string/str_welcome_title_2"
+        android:textColor="#29B6F6"
+        android:textSize="@dimen/sp_18" />
+
+
+</RelativeLayout>

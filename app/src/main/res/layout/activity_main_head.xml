@@ -8,8 +8,33 @@
 
     <RelativeLayout
         android:id="@+id/rl_head"
+        android:layout_marginTop="@dimen/dp_20"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_200">
+
+        <TextView
+            android:id="@+id/tv_coinCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:singleLine="true"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_13" />
+
+        <TextView
+            android:id="@+id/tv_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:singleLine="true"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/sp_13" />
 
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -18,7 +43,7 @@
             android:layout_height="@dimen/dp_120"
             android:layout_centerInParent="true"
             android:src="@mipmap/icon_user"
-            app:riv_border_color="@color/color_f00"
+            app:riv_border_color="@color/color_ffffff"
             app:riv_border_width="@dimen/dp_2"
             app:riv_oval="true" />
 
