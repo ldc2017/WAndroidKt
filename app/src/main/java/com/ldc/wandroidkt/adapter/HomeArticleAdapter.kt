@@ -18,24 +18,25 @@ class HomeArticleAdapter :
 
     val TAG: String = HomeArticleAdapter::class.java.name
 
-    override fun convert(helper: BaseViewHolder, modelItem: HomeArticleModel.Data) {
-        modelItem ?: return
+    override fun convert(helper: BaseViewHolder, item: HomeArticleModel.Data) {
+        item ?: return
         //描述
-        val str_html = HtmlCompat.fromHtml(modelItem.desc, HtmlCompat.FROM_HTML_MODE_COMPACT)
+        val str_html = HtmlCompat.fromHtml(item.desc, HtmlCompat.FROM_HTML_MODE_COMPACT)
+        val str_title = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_COMPACT)
         //事件
 
-        helper.setText(R.id.tv_title, modelItem.chapterName)
-            .setText(R.id.tv_content, modelItem.title + str_html)
-            .setText(R.id.tv_time_author, modelItem.author + " " + modelItem.niceShareDate)
+        helper.setText(R.id.tv_title, item.chapterName)
+            .setText(R.id.tv_content, "${str_title}\n${str_html}")
+            .setText(R.id.tv_time_author, item.author + " " + item.niceShareDate)
         val ck: AppCompatCheckBox = helper.getView<AppCompatCheckBox>(R.id.ck_favorite)
-        ck.isChecked = modelItem.collect
+        ck.isChecked = item.collect
         //
-        Log.e(TAG, "----图片:" + modelItem.envelopePic)
+        Log.e(TAG, "----图片:" + item.envelopePic)
         //
         //
-        if (!TextUtils.isEmpty(modelItem.envelopePic)) {
+        if (!TextUtils.isEmpty(item.envelopePic)) {
             helper.setGone(R.id.icon_image, false)
-            Picasso.get().load(modelItem.envelopePic)
+            Picasso.get().load(item.envelopePic)
                 .resize(200, 160)
                 .placeholder(R.drawable.icon_imager_helper)
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)

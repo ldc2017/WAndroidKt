@@ -7,18 +7,18 @@ import androidx.core.text.HtmlCompat
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.ldc.wandroidkt.R
-import com.ldc.wandroidkt.model.FavoriteArticleListModel
+import com.ldc.wandroidkt.model.SearchArticleModel
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 
-class MyFavoriteArticleAdapter :
+class SearchArticleAdapter :
 
-    BaseQuickAdapter<FavoriteArticleListModel.Data, BaseViewHolder>(R.layout.layout_item_article_image) {
+    BaseQuickAdapter<SearchArticleModel.Data, BaseViewHolder>(R.layout.layout_item_article_image) {
 
-    val TAG: String = MyFavoriteArticleAdapter::class.java.name
+    val TAG: String = SearchArticleAdapter::class.java.name
 
-    override fun convert(helper: BaseViewHolder, item: FavoriteArticleListModel.Data) {
+    override fun convert(helper: BaseViewHolder, item: SearchArticleModel.Data) {
         item ?: return
         //描述
         val str_html = HtmlCompat.fromHtml(item.desc, HtmlCompat.FROM_HTML_MODE_COMPACT)
@@ -27,9 +27,9 @@ class MyFavoriteArticleAdapter :
 
         helper.setText(R.id.tv_title, item.chapterName)
             .setText(R.id.tv_content, "${str_title}\n${str_html}")
-            .setText(R.id.tv_time_author, item.author + " " + item.publishTime)
+            .setText(R.id.tv_time_author, item.author + " " + item.niceShareDate)
         val ck: AppCompatCheckBox = helper.getView<AppCompatCheckBox>(R.id.ck_favorite)
-        ck.isChecked = true
+        ck.isChecked = item.collect
         //
         Log.e(TAG, "----图片:" + item.envelopePic)
         //

@@ -22,10 +22,11 @@ class ProjectArticleAdapter :
         item ?: return
         //描述
         val str_html = HtmlCompat.fromHtml(item.desc, HtmlCompat.FROM_HTML_MODE_COMPACT)
+        val str_title = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_COMPACT)
         //事件
 
         helper.setText(R.id.tv_title, item.chapterName)
-            .setText(R.id.tv_content, item.title + str_html)
+            .setText(R.id.tv_content, "${str_title}\n${str_html}")
             .setText(R.id.tv_time_author, item.author + " " + item.niceShareDate)
         val ck: AppCompatCheckBox = helper.getView<AppCompatCheckBox>(R.id.ck_favorite)
         ck.isChecked = item.collect

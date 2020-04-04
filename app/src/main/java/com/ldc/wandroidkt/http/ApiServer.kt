@@ -106,4 +106,11 @@ interface ApiServer {
         @Query(value = "originId") originId: String = "-1"
     ): Observable<BaseModel<Any>>
 
+    //搜索
+    @POST(value = "/article/query/{index}/json")
+    fun search_article(
+        @Path(value = "index") index: Int,
+        @Query(value = "k") query: String
+    ): Observable<BaseModel<SearchArticleModel>>
+
 }

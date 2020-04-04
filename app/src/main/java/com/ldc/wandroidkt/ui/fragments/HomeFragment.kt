@@ -116,7 +116,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
     override fun show_loading(str_message: String?) {
         if (1 == curr_index) {
-            mBinding.loadingLayout.loadingLayout.visibility = View.GONE
+            mBinding.loadingLayout.loadingLayout.visibility = View.VISIBLE
             mBinding.loadingLayout.loadingText.text = str_message
         }
 

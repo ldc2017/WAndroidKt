@@ -15,6 +15,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.blankj.utilcode.util.ToastUtils
 import com.google.android.material.navigation.NavigationView
+import com.ldc.wandroidkt.BuildConfig
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.MainContract
@@ -35,10 +36,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
 
 
     companion object {
-        fun actionStart(act: Activity, requestCode: Int = 0x000) {
-            val intent = Intent(act, MainActivity::class.java)
-            act.startActivityForResult(intent, requestCode)
-            act.overridePendingTransition(0, 0)
+        fun actionStart(activity: Activity, requestCode: Int = 0x000) {
+            val intent = Intent(activity, MainActivity::class.java)
+            activity.startActivityForResult(intent, requestCode)
+            activity.overridePendingTransition(0, 0)
         }
     }
 
@@ -259,16 +260,20 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                         return true
                     }
                     R.id.item_search -> {
-                        show_toast("敬请期待")
-                        // ArticleSearchActivity.actionStart(activity!!)
+                         SearchArticleActivity.actionStart(activity!!)
                         return true
                     }
                     R.id.item_about_author -> {
-                        show_toast("作者")
+                        WebViewActivity.actionStart(
+                            activity!!,
+                            "关于作者",
+                            "https://weibo.com/1785876814/profile?rightmod=1&wvr=6&mod=personinfo"
+                        )
+
                         return true
                     }
                     R.id.item_about_app -> {
-                        show_toast("关于程序")
+                        aboutDialog()
                         return true
                     }
                 }
@@ -308,6 +313,35 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
 
             }
         })
+        dialog.create()
+        dialog.show()
+    }
+
+    //关于
+    private fun aboutDialog() {
+        val items: Array<String> = arrayOf(
+            resources.getString(R.string.app_name),
+            BuildConfig.BUILD_TYPE,
+            java.lang.String.format("版本号:%s", BuildConfig.VERSION_CODE),
+            java.lang.String.format("版本:%s", BuildConfig.VERSION_NAME),
+            String.format("接口地址:\n%s\n", "https://www.wanandroid.com/"),
+            String.format("项目地址:\n%s\n", "https://github.com/ldc2017/WAndroidKt")
+        )
+        val dialog = AlertDialog.Builder(activity!!)
+        dialog.setItems(items) { _, index ->
+            when (index) {
+                4 -> {
+                    WebViewActivity.actionStart(activity!!, "https://www.wanandroid.com/", "接口地址")
+                }
+                5 -> {
+                    WebViewActivity.actionStart(
+                        activity!!,
+                        "https://github.com/ldc2017/WAndroidKt",
+                        "项目地址"
+                    )
+                }
+            }
+        }
         dialog.create()
         dialog.show()
     }

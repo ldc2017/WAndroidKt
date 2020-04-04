@@ -127,7 +127,7 @@ class ProjectArticleFragment :
 
     override fun show_loading(str_message: String?) {
         if (1 == curr_idnex) {
-            mBinding.loadingLayout.loadingLayout.visibility = View.GONE
+            mBinding.loadingLayout.loadingLayout.visibility = View.VISIBLE
             mBinding.loadingLayout.loadingText.text = str_message
         }
 

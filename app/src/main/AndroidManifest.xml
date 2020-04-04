@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activitys.ArticleSearchActivity"
+            android:name=".ui.activitys.SearchArticleActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".ui.activitys.MyFavoriteActivity"
