@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Handler
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.AppCompatCheckBox
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.SystemArticleAdapter
@@ -103,6 +105,21 @@ class SystemArticleActivity : BaseActivity<ActivitySystemArticleBinding, SystemA
 
     }
 
+    override fun collect_article_resp(d: BaseModel<Any>) {
+        d ?: return
+        if (Api.error_code_success == d.errorCode) {
+            show_toast("已收藏")
+        } else show_toast(d.errorMsg)
+
+    }
+
+    override fun uncollect_article_resp(d: BaseModel<Any>) {
+        d ?: return
+        if (Api.error_code_success == d.errorCode) {
+            show_toast("取消收藏")
+        } else show_toast(d.errorMsg)
+    }
+
     override fun show_toast(str_message: String?) {
         ToastUtils.showShort(str_message)
 
@@ -151,7 +168,23 @@ class SystemArticleActivity : BaseActivity<ActivitySystemArticleBinding, SystemA
                 WebViewActivity.actionStart(activity!!, dt.link, dt.title)
             }
         })
-
+        systemArticleAdapter.addChildClickViewIds(R.id.ck_favorite)
+        systemArticleAdapter.setOnItemChildClickListener(object : OnItemChildClickListener {
+            override fun onItemChildClick(
+                adapter: BaseQuickAdapter<*, *>,
+                view: View,
+                position: Int
+            ) {
+                val dts: MutableList<SystemArticleModel.Data> =
+                    adapter.data as MutableList<SystemArticleModel.Data> ?: return
+                val dt: SystemArticleModel.Data = dts[position] ?: return
+                if (!(view as AppCompatCheckBox).isChecked) {
+                    mPresenter.uncollect_article_req("${dt.id}")
+                } else {
+                    mPresenter.collect_article_req("${dt.id}")
+                }
+            }
+        })
     }
 
     //刷新事件

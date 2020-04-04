@@ -57,7 +57,7 @@ class RequestLogStatusInterceptor() : Interceptor {
             if (Api.error_code_no_login == model.errorCode) {
                 val intent = Intent(Utils.getApp(), LoginActivity::class.java)
                 ActivityUtils.startActivity(intent)
-                ActivityUtils.getTopActivity().finish()
+                ActivityUtils.finishAllActivities()
             }
         } catch (e: Exception) {
             e.printStackTrace()

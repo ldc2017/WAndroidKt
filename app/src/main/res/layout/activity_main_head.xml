@@ -54,7 +54,6 @@
             android:layout_below="@id/iv_user"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_10"
-            android:text="用户名"
             android:textColor="@color/color_222222"
             android:textSize="@dimen/sp_14" />
 

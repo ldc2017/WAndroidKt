@@ -3,9 +3,11 @@ package com.ldc.wandroidkt.ui.fragments
 import android.os.Handler
 import android.os.Message
 import android.view.View
+import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.WXNumberArticleAdapter
@@ -105,6 +107,21 @@ class WXNumberArticleFragment :
 
     }
 
+    override fun collect_article_resp(d: BaseModel<Any>) {
+        d ?: return
+        if (Api.error_code_success == d.errorCode) {
+            show_toast("已收藏")
+        } else show_toast(d.errorMsg)
+
+    }
+
+    override fun uncollect_article_resp(d: BaseModel<Any>) {
+        d ?: return
+        if (Api.error_code_success == d.errorCode) {
+            show_toast("取消收藏")
+        } else show_toast(d.errorMsg)
+    }
+
     override fun show_toast(str_message: String?) {
         ToastUtils.showShort(str_message)
 
@@ -159,7 +176,23 @@ class WXNumberArticleFragment :
                 WebViewActivity.actionStart(activity!!, dt.link, dt.title)
             }
         })
-
+        wxNumberArticleAdapter.addChildClickViewIds(R.id.ck_favorite)
+        wxNumberArticleAdapter.setOnItemChildClickListener(object : OnItemChildClickListener {
+            override fun onItemChildClick(
+                adapter: BaseQuickAdapter<*, *>,
+                view: View,
+                position: Int
+            ) {
+                val dts: MutableList<WxNumberArticleModel.Data> =
+                    adapter.data as MutableList<WxNumberArticleModel.Data> ?: return
+                val dt: WxNumberArticleModel.Data = dts[position] ?: return
+                if (!(view as AppCompatCheckBox).isChecked) {
+                    mPresenter.uncollect_article_req("${dt.id}")
+                } else {
+                    mPresenter.collect_article_req("${dt.id}")
+                }
+            }
+        })
     }
 
 

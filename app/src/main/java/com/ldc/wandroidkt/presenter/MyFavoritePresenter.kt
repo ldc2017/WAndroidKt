@@ -12,23 +12,23 @@ import io.reactivex.schedulers.Schedulers
 
 class MyFavoritePresenter constructor(v: MyFavoriteContract.V) :
     BasePresenter<MyFavoriteContract.V>(v), MyFavoriteContract.P {
-    private val apiServer=Api2Request.instances
+    private val apiServer = Api2Request.instances
     override fun get_favorite_article_list_req(index: Int) {
         getView().show_loading("加载中···")
         apiServer.get_collect_article_list(index)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object :Observer<BaseModel<FavoriteArticleListModel>>{
+            .subscribe(object : Observer<BaseModel<FavoriteArticleListModel>> {
                 private lateinit var disposable: Disposable
                 override fun onComplete() {
                     getView().hide_loading()
                     destory_disposable(disposable)
-                    
+
                 }
 
                 override fun onSubscribe(d: Disposable) {
-                    disposable =d
-                    
+                    disposable = d
+
                 }
 
                 override fun onNext(t: BaseModel<FavoriteArticleListModel>) {
@@ -40,6 +40,32 @@ class MyFavoritePresenter constructor(v: MyFavoriteContract.V) :
                     destory_disposable(disposable)
                 }
             })
-        
+
+    }
+
+
+    override fun uncollect_article_req(id: String, originId: String) {
+        apiServer.favorite_article_uncollect(id, originId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<BaseModel<Any>> {
+                private lateinit var disposable: Disposable
+                override fun onComplete() {
+                    destory_disposable(disposable)
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+                }
+
+                override fun onNext(t: BaseModel<Any>) {
+                    getView().uncollect_article_resp(t)
+                }
+
+                override fun onError(e: Throwable) {
+
+                    destory_disposable(disposable)
+                }
+            })
     }
 }

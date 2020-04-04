@@ -50,8 +50,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                 dt ?: return@Callback false
                 mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_rank).text =
                     "排名:${dt.rank}"
-                mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_coinCount).text =
+                mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_coinCount)
+                    .text =
                     "积分:${dt.coinCount}"
+                mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_user_name)
+                    .text =
+                    cmConstants.get_user_username()
 
                 return@Callback true
             }
@@ -100,9 +104,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
     }
 
     override fun init_data() {
-
-        mBinding.navigationView.getHeaderView(0).findViewById<TextView>(R.id.tv_user_name).text =
-            cmConstants.get_user_username()
 
     }
 

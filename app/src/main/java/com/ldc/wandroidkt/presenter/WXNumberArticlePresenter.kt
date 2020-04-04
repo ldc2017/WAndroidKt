@@ -44,4 +44,57 @@ class WXNumberArticlePresenter(v: WXNumberArticleContract.V) :
             })
 
     }
+
+
+
+
+    override fun collect_article_req(id: String) {
+        apiServer.collect_article(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<BaseModel<Any>> {
+                private lateinit var disposable: Disposable
+                override fun onComplete() {
+                    destory_disposable(disposable)
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+                }
+
+                override fun onNext(t: BaseModel<Any>) {
+                    getView().collect_article_resp(t)
+                }
+
+                override fun onError(e: Throwable) {
+
+                    destory_disposable(disposable)
+                }
+            })
+    }
+
+    override fun uncollect_article_req(id: String) {
+        apiServer.uncollect_article(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<BaseModel<Any>> {
+                private lateinit var disposable: Disposable
+                override fun onComplete() {
+                    destory_disposable(disposable)
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+                }
+
+                override fun onNext(t: BaseModel<Any>) {
+                    getView().uncollect_article_resp(t)
+                }
+
+                override fun onError(e: Throwable) {
+
+                    destory_disposable(disposable)
+                }
+            })
+    }
 }

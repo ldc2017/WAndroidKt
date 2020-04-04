@@ -84,7 +84,26 @@ interface ApiServer {
     @GET(value = "/lg/collect/list/{index}/json")
     fun get_collect_article_list(
         @Path(value = "index") index: Int = 0
-    ):Observable<BaseModel<FavoriteArticleListModel>>
+    ): Observable<BaseModel<FavoriteArticleListModel>>
 
+    //收藏文章
+    @POST(value = "/lg/collect/{id}/json")
+    fun collect_article(
+        @Path(value = "id") id: String
+    ): Observable<BaseModel<Any>>
+
+    //取消收藏
+    @POST(value = "/lg/uncollect_originId/{id}/json")
+    fun uncollect_article(
+        @Path(value = "id") id: String
+    ): Observable<BaseModel<Any>>
+
+
+    //收藏页面
+    @POST(value = "/lg/uncollect/{id}/json")
+    fun favorite_article_uncollect(
+        @Path(value = "id") id: String,
+        @Query(value = "originId") originId: String = "-1"
+    ): Observable<BaseModel<Any>>
 
 }

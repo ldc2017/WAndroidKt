@@ -6,6 +6,9 @@ import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import com.blankj.utilcode.util.ToastUtils
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.MyFavoriteArticleAdapter
 import com.ldc.wandroidkt.commom.cmConstants
@@ -85,6 +88,17 @@ class MyFavoriteActivity : BaseActivity<ActivityMyFavoriteBinding, MyFavoritePre
         } else show_toast(dt.errorMsg)
     }
 
+
+    override fun uncollect_article_resp(d: BaseModel<Any>) {
+        d ?: return
+        if (Api.error_code_success == d.errorCode) {
+            curr_index = 0
+            mPresenter.get_favorite_article_list_req(curr_index)
+            show_toast("取消收藏")
+        } else show_toast(d.errorMsg)
+    }
+
+
     override fun show_toast(str_message: String?) {
         ToastUtils.showShort(str_message)
     }
@@ -128,6 +142,30 @@ class MyFavoriteActivity : BaseActivity<ActivityMyFavoriteBinding, MyFavoritePre
         mBinding.dataList.setHasFixedSize(true)
         mBinding.dataList.adapter = myFavoriteArticleAdapter
         myFavoriteArticleAdapter.setEmptyView(R.layout.layout_view_no_data)
+        myFavoriteArticleAdapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+                val dts: MutableList<FavoriteArticleListModel.Data> =
+                    adapter.data as MutableList<FavoriteArticleListModel.Data>
+                dts ?: return
+                val dt: FavoriteArticleListModel.Data = dts[position]
+                dt ?: return
+                WebViewActivity.actionStart(activity!!, dt.link, dt.title)
+            }
+        })
+        myFavoriteArticleAdapter.addChildClickViewIds(R.id.ck_favorite)
+        myFavoriteArticleAdapter.setOnItemChildClickListener(object : OnItemChildClickListener {
+            override fun onItemChildClick(
+                adapter: BaseQuickAdapter<*, *>,
+                view: View,
+                position: Int
+            ) {
+                val dts: MutableList<FavoriteArticleListModel.Data> =
+                    adapter.data as MutableList<FavoriteArticleListModel.Data> ?: return
+                val dt: FavoriteArticleListModel.Data = dts[position] ?: return
+                mPresenter.uncollect_article_req("${dt.id}", "${dt.originId ?: -1}")
+
+            }
+        })
     }
 
     //刷新事件

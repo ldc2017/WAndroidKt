@@ -88,7 +88,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/icon_favorite_selector"
-                    android:button="@null" />
+                    android:button="@null"
+                    android:checked="false" />
             </RelativeLayout>
 
         </RelativeLayout>
