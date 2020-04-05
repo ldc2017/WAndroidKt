@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import com.blankj.utilcode.util.ToastUtils
 import com.just.agentweb.AgentWeb
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.commom.cmConstants
@@ -81,7 +80,7 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>()
     }
 
     override fun show_toast(str_message: String?) {
-        ToastUtils.showShort(str_message)
+        //ToastUtils.showShort(str_message)
 
     }
 
