@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import com.blankj.utilcode.util.Utils
 import com.ldc.wandroidkt.commom.ErrorHandle
+import io.reactivex.plugins.RxJavaPlugins
 import me.yokeyword.fragmentation.Fragmentation
 
 class mApp : Application() {
@@ -24,6 +25,8 @@ class mApp : Application() {
             .install()
         //
         Thread.setDefaultUncaughtExceptionHandler(ErrorHandle())
+        //
+        RxJavaPlugins.setErrorHandler { e -> e.printStackTrace() }
     }
 
 
