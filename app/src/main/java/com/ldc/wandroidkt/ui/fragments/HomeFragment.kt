@@ -16,10 +16,7 @@ import com.ldc.wandroidkt.contract.HomeContract
 import com.ldc.wandroidkt.core.BaseFragment
 import com.ldc.wandroidkt.databinding.FragmentHomeBinding
 import com.ldc.wandroidkt.http.Api
-import com.ldc.wandroidkt.model.BannerModel
-import com.ldc.wandroidkt.model.BannerModelItem
-import com.ldc.wandroidkt.model.BaseModel
-import com.ldc.wandroidkt.model.HomeArticleModel
+import com.ldc.wandroidkt.model.*
 import com.ldc.wandroidkt.presenter.HomePresenter
 import com.ldc.wandroidkt.ui.activitys.WebViewActivity
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -37,7 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     private val home_article_adapter: HomeArticleAdapter =
         HomeArticleAdapter()
     @Volatile
-    private var curr_index = 1
+    private var curr_index = 0
     private val refresh_banner_code: Int = 0x000
     private val refresh_home_article_code: Int = 0x001
     private var uiHandler: Handler = Handler(Handler.Callback { msg ->
@@ -50,10 +47,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             refresh_home_article_code -> {
                 val dts: MutableList<HomeArticleModel.Data> =
                     msg.obj as MutableList<HomeArticleModel.Data>
-                if (1 == curr_index) {
-                    home_article_adapter.setNewData(dts)
-                } else {
-                    home_article_adapter.addData(dts)
+                when (curr_index) {
+                    0 -> {
+                        home_article_adapter.setNewData(dts)
+                    }
+                    1 -> {
+                        home_article_adapter.addData(dts)
+                    }
+                    else -> {
+                        home_article_adapter.addData(dts)
+                    }
                 }
                 return@Callback true
             }
@@ -107,7 +110,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
     override fun init_data() {
         mPresenter.get_banner_req()
-        mPresenter.get_home_article(curr_index)
+        mPresenter.get_top_article_req()
     }
 
     override fun show_toast(str_message: String?) {
@@ -152,6 +155,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             show_toast(dts.errorMsg)
         }
 
+    }
+
+    override fun get_top_article_resp(dts: BaseModel<TopArticleModel>) {
+        //
+        dts ?: return
+        if (Api.error_code_success == dts.errorCode) {
+            val message = uiHandler.obtainMessage(refresh_home_article_code)
+            message.obj = dts.data
+            uiHandler.sendMessage(message)
+        } else show_toast(dts.errorMsg)
+        //获取文章
+        curr_index = 1
+        mPresenter.get_home_article(curr_index)
     }
 
     override fun collect_article_resp(d: BaseModel<Any>) {

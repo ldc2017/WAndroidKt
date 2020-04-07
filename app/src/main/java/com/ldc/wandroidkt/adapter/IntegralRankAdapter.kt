@@ -11,8 +11,11 @@ class IntegralRankAdapter :
         item ?: return
         helper.setText(
             R.id.tv_title,
+            "${item.rank}"
+        ).setText(
+            R.id.tv_rank,
             item.username
-        ).setText(R.id.tv_rank, "${item.rank}")
+        )
 
     }
 }

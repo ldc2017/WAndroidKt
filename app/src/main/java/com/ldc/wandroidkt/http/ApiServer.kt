@@ -122,4 +122,9 @@ interface ApiServer {
         @Query(value = "repassword") repassword: String
     ): Observable<BaseModel<Any>>
 
+
+    //置顶文章
+    @GET(value = "/article/top/json")
+    fun topArticle(): Observable<BaseModel<TopArticleModel>>
+
 }

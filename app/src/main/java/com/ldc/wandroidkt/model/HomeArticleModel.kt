@@ -1,6 +1,8 @@
 package com.ldc.wandroidkt.model
 
+import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.google.gson.annotations.SerializedName
+import com.ldc.wandroidkt.commom.cmConstants
 
 
 data class HomeArticleModel(
@@ -82,7 +84,10 @@ data class HomeArticleModel(
         val visible: Int,
         @SerializedName("zan")
         val zan: Int
-    ) {
+    ) : MultiItemEntity {
+        override val itemType: Int
+            get() = if (type == 1) cmConstants.top_article_code else cmConstants.home_article_code
+
         data class Tag(
             @SerializedName("name")
             val name: String,

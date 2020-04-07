@@ -12,8 +12,8 @@ class PersonalIntegralListAdapter :
         val len: Int = item.desc.length
         helper.setText(
             R.id.tv_title,
-            item.desc.substring(len - 10, len)
-        ).setText(R.id.tv_rank, "${item.coinCount}")
+            "${item.coinCount}"
+        ).setText(R.id.tv_rank, item.desc.substring(len - 10, len))
 
     }
 }

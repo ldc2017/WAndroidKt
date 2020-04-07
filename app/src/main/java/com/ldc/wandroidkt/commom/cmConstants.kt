@@ -7,6 +7,8 @@ object cmConstants {
     const val SizeInDp: Float = 667f
     const val isBaseOnWidth: Boolean = false
 
+    const val top_article_code = 0x00//置顶文章
+    const val home_article_code = 0x01//首页文章
 
     //
     const val user_name: String = "user_name"

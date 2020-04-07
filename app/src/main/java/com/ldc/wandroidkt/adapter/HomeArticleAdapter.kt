@@ -4,17 +4,24 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.core.text.HtmlCompat
-import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.ldc.wandroidkt.R
+import com.ldc.wandroidkt.commom.cmConstants
+import com.ldc.wandroidkt.commom.cmConstants.home_article_code
+import com.ldc.wandroidkt.commom.cmConstants.top_article_code
 import com.ldc.wandroidkt.model.HomeArticleModel
 import com.makeramen.roundedimageview.RoundedImageView
 import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 
 class HomeArticleAdapter :
+    BaseMultiItemQuickAdapter<HomeArticleModel.Data, BaseViewHolder>() {
 
-    BaseQuickAdapter<HomeArticleModel.Data, BaseViewHolder>(R.layout.layout_item_article_image) {
+    init {
+        addItemType(cmConstants.top_article_code, R.layout.layout_item_article_image)
+        addItemType(cmConstants.home_article_code, R.layout.layout_item_article_image)
+    }
 
     val TAG: String = HomeArticleAdapter::class.java.name
 
@@ -33,6 +40,12 @@ class HomeArticleAdapter :
         //
         Log.e(TAG, "----图片:" + item.envelopePic)
         //
+        if (item.itemType == top_article_code) {
+            //置顶文章
+            helper.setGone(R.id.tv_top, false)
+        } else if (item.itemType == home_article_code) {
+            helper.setGone(R.id.tv_top, true)
+        }
         //
         if (!TextUtils.isEmpty(item.envelopePic)) {
             helper.setGone(R.id.icon_image, false)

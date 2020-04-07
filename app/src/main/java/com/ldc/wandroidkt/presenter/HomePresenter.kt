@@ -7,6 +7,7 @@ import com.ldc.wandroidkt.http.ApiServer
 import com.ldc.wandroidkt.model.BannerModel
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.HomeArticleModel
+import com.ldc.wandroidkt.model.TopArticleModel
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -76,6 +77,33 @@ open class HomePresenter(v: HomeContract.V) : BasePresenter<HomeContract.V>(v),
             })
 
 
+    }
+
+    override fun get_top_article_req() {
+        apiServer.topArticle()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<BaseModel<TopArticleModel>> {
+                private lateinit var disposable: Disposable
+                override fun onComplete() {
+                    destory_disposable(disposable)
+
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+
+                }
+
+                override fun onNext(t: BaseModel<TopArticleModel>) {
+                    getView().get_top_article_resp(t)
+                }
+
+                override fun onError(e: Throwable) {
+                    e.printStackTrace()
+                    destory_disposable(disposable)
+                }
+            })
     }
 
     override fun collect_article_req(id: String) {
