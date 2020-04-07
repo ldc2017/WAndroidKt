@@ -144,7 +144,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
 
         //注册
         fun register(v: View) {
-            show_toast("敬请期待")
+            RegisterActivity.actionStart(activity!!)
         }
     }
 

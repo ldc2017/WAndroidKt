@@ -113,4 +113,13 @@ interface ApiServer {
         @Query(value = "k") query: String
     ): Observable<BaseModel<SearchArticleModel>>
 
+
+    //注册
+    @POST(value = "/user/register")
+    fun register(
+        @Query(value = "username") username: String,
+        @Query(value = "password") password: String,
+        @Query(value = "repassword") repassword: String
+    ): Observable<BaseModel<Any>>
+
 }
