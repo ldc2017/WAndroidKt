@@ -3,6 +3,20 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('E:\\androidJKS\\android-gr.jks')
+            storePassword '123456'
+            keyAlias = 'android'
+            keyPassword '123456'
+        }
+        debug {
+            storeFile file('E:\\androidJKS\\android-gr.jks')
+            storePassword '123456'
+            keyAlias = 'android'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
@@ -14,6 +28,7 @@ android {
         versionName "1.17"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
