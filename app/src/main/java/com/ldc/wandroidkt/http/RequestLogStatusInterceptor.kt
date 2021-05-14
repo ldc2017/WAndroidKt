@@ -35,8 +35,8 @@ class RequestLogStatusInterceptor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val req = chain.request()
         val resp = chain.proceed(req)
-        val mediaType = resp.body()!!.contentType()
-        val json: String = resp.body()!!.string()
+        val mediaType = resp.body!!.contentType()
+        val json: String = resp.body!!.string()
 
         //
         val message = handler.obtainMessage(notify_code)
