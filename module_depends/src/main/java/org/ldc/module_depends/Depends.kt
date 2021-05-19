@@ -66,7 +66,8 @@ object Depends {
     const val banner = "com.youth.banner:banner:2.0.0-alpha02"  //预览版
 
     //
-    const val picasso = "com.squareup.picasso:picasso:2.71828"
+    const val glide = "com.github.bumptech.glide:glide:4.12.0"
+    const val glide_compiler = "com.github.bumptech.glide:compiler:4.12.0"
 
     //
     const val circleimageview = "de.hdodenhof:circleimageview:3.1.0"

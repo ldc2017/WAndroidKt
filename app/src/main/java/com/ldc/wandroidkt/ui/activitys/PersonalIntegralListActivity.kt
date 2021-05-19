@@ -10,9 +10,9 @@ import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.PersonalIntegralListAdapter
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.PersonalIntegralListContract
-import com.ldc.wandroidkt.core.BaseActivity
+import org.ldc.module_res.core.BaseActivity
 import com.ldc.wandroidkt.databinding.ActivityPersonalIntegralListBinding
-import com.ldc.wandroidkt.http.Api
+import org.ldc.module_res.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.PersonalIntegralListModel
 import com.ldc.wandroidkt.presenter.PersonalIntegralListPresenter
@@ -57,11 +57,11 @@ class PersonalIntegralListActivity :
         return R.layout.activity_personal_integral_list
     }
 
-    override fun init_presenter(): PersonalIntegralListPresenter {
+    override fun initPresenter(): PersonalIntegralListPresenter {
         return PersonalIntegralListPresenter(this)
     }
 
-    override fun init_view() {
+    override fun initView() {
         mBinding.refreshView.setOnRefreshLoadMoreListener(onRefreshLoadMoreListener)
         mBinding.refreshView.setEnableLoadMore(true)
         //
@@ -74,7 +74,7 @@ class PersonalIntegralListActivity :
 
     }
 
-    override fun init_data() {
+    override fun initData() {
         mPresenter.get_personal_integral_list_req(curr_index)
     }
 

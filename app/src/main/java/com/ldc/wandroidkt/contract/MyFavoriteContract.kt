@@ -1,6 +1,6 @@
 package com.ldc.wandroidkt.contract
 
-import com.ldc.wandroidkt.core.IView
+import org.ldc.module_res.core.IView
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.FavoriteArticleListModel
 

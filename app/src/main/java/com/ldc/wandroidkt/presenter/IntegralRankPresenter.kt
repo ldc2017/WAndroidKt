@@ -1,16 +1,14 @@
 package com.ldc.wandroidkt.presenter
 
 import com.ldc.wandroidkt.contract.IntegralRankContract
-import com.ldc.wandroidkt.core.BasePresenter
+import org.ldc.module_res.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
-import com.ldc.wandroidkt.http.ApiScheduler
+import org.ldc.module_res.http.ApiScheduler
 import com.ldc.wandroidkt.http.ApiServer
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.IntegralRankModel
 import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class IntegralRankPresenter constructor(v: IntegralRankContract.V) :
     BasePresenter<IntegralRankContract.V>(v), IntegralRankContract.P {

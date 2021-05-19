@@ -13,9 +13,9 @@ import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.MyFavoriteArticleAdapter
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.MyFavoriteContract
-import com.ldc.wandroidkt.core.BaseActivity
+import org.ldc.module_res.core.BaseActivity
 import com.ldc.wandroidkt.databinding.ActivityMyFavoriteBinding
-import com.ldc.wandroidkt.http.Api
+import org.ldc.module_res.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.FavoriteArticleListModel
 import com.ldc.wandroidkt.presenter.MyFavoritePresenter
@@ -58,11 +58,11 @@ class MyFavoriteActivity : BaseActivity<ActivityMyFavoriteBinding, MyFavoritePre
         return R.layout.activity_my_favorite
     }
 
-    override fun init_presenter(): MyFavoritePresenter {
+    override fun initPresenter(): MyFavoritePresenter {
         return MyFavoritePresenter(this)
     }
 
-    override fun init_view() {
+    override fun initView() {
         mBinding.refreshView.setOnRefreshLoadMoreListener(onRefreshLoadMoreListener)
         mBinding.refreshView.setEnableLoadMore(true)
         //
@@ -74,7 +74,7 @@ class MyFavoriteActivity : BaseActivity<ActivityMyFavoriteBinding, MyFavoritePre
         init_adapter()
     }
 
-    override fun init_data() {
+    override fun initData() {
         mPresenter.get_favorite_article_list_req(curr_index)
     }
 

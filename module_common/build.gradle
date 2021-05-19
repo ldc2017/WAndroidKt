@@ -83,7 +83,7 @@ dependencies {
     //
     api Depends.banner//预览版
     //
-    api Depends.picasso
+    api Depends.glide
     //
     api Depends.circleimageview
     //

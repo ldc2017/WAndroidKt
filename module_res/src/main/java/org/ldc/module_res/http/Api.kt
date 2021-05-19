@@ -1,4 +1,4 @@
-package com.ldc.wandroidkt.http
+package org.ldc.module_res.http
 
 object Api {
     const val base_url: String = "https://www.wanandroid.com"

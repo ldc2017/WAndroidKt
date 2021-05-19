@@ -1,4 +1,4 @@
-package com.ldc.wandroidkt.core
+package org.ldc.module_res.core
 
 import android.app.Activity
 import android.content.Intent
@@ -48,9 +48,9 @@ abstract class BaseActivity<B : ViewDataBinding, P : BasePresenter<*>> : Support
             activity = this
             handleIntent(intent)
             mBinding = DataBindingUtil.setContentView(this, ui())
-            mPresenter = init_presenter()
-            init_view()
-            init_data()
+            mPresenter = initPresenter()
+            initView()
+            initData()
         } catch (e: Exception) {
             handleError(e)
             e.printStackTrace()
@@ -58,9 +58,9 @@ abstract class BaseActivity<B : ViewDataBinding, P : BasePresenter<*>> : Support
     }
 
     abstract fun ui(): Int
-    abstract fun init_presenter(): P
-    abstract fun init_view()
-    abstract fun init_data()
+    abstract fun initPresenter(): P
+    abstract fun initView()
+    abstract fun initData()
     open fun handleError(e: Exception) {}
     open fun handleIntent(it: Intent?) {}
 }

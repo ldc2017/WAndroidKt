@@ -11,9 +11,9 @@ import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.WxNumberAdapter
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.WXNumberContract
-import com.ldc.wandroidkt.core.BaseFragment
+import org.ldc.module_res.core.BaseFragment
 import com.ldc.wandroidkt.databinding.FragmentWxNumberBinding
-import com.ldc.wandroidkt.http.Api
+import org.ldc.module_res.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.WXNumberModel
 import com.ldc.wandroidkt.model.WXNumberModelItem

@@ -10,9 +10,9 @@ import com.blankj.utilcode.util.ToastUtils
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.LoginContract
-import com.ldc.wandroidkt.core.BaseActivity
+import org.ldc.module_res.core.BaseActivity
 import com.ldc.wandroidkt.databinding.ActivityLoginBinding
-import com.ldc.wandroidkt.http.Api
+import org.ldc.module_res.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.LoginModel
 import com.ldc.wandroidkt.presenter.LoginPresenter
@@ -66,11 +66,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
 
     }
 
-    override fun init_presenter(): LoginPresenter {
+    override fun initPresenter(): LoginPresenter {
         return LoginPresenter(this)
     }
 
-    override fun init_view() {
+    override fun initView() {
         mBinding.eventListener = EventListener()
         //
         mBinding.layoutWelcome.visibility = View.VISIBLE
@@ -81,7 +81,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
 
     }
 
-    override fun init_data() {
+    override fun initData() {
 
     }
 

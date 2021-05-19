@@ -13,9 +13,9 @@ import com.ldc.wandroidkt.adapter.HomeArticleAdapter
 import com.ldc.wandroidkt.adapter.HomeBannerAdapter
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.HomeContract
-import com.ldc.wandroidkt.core.BaseFragment
+import org.ldc.module_res.core.BaseFragment
 import com.ldc.wandroidkt.databinding.FragmentHomeBinding
-import com.ldc.wandroidkt.http.Api
+import org.ldc.module_res.http.Api
 import com.ldc.wandroidkt.model.*
 import com.ldc.wandroidkt.presenter.HomePresenter
 import com.ldc.wandroidkt.ui.activitys.WebViewActivity

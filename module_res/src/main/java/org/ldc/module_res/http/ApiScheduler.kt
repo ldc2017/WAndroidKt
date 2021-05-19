@@ -1,4 +1,4 @@
-package com.ldc.wandroidkt.http
+package org.ldc.module_res.http
 
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers

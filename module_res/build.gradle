@@ -25,6 +25,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    //数据绑定
+    dataBinding.enabled = true
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -36,4 +41,5 @@ android {
 
 dependencies {
     api project(path: ':module_common')
+    androidTestImplementation 'junit:junit:4.12'
 }

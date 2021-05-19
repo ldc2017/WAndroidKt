@@ -1,4 +1,4 @@
-package com.ldc.wandroidkt.core
+package org.ldc.module_res.core
 
 interface IView {
 

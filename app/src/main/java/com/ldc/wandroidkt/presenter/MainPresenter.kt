@@ -1,15 +1,13 @@
 package com.ldc.wandroidkt.presenter
 
 import com.ldc.wandroidkt.contract.MainContract
-import com.ldc.wandroidkt.core.BasePresenter
+import org.ldc.module_res.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
-import com.ldc.wandroidkt.http.ApiScheduler
+import org.ldc.module_res.http.ApiScheduler
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.PersonalIntegralModel
 import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class MainPresenter(v: MainContract.V) : BasePresenter<MainContract.V>(v), MainContract.P {
     private val apiServer = Api2Request.instances

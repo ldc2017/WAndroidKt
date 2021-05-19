@@ -5,12 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ldc.wandroidkt.R
-import com.ldc.wandroidkt.model.BannerModel
 import com.ldc.wandroidkt.model.BannerModelItem
 import com.makeramen.roundedimageview.RoundedImageView
-import com.squareup.picasso.MemoryPolicy
-import com.squareup.picasso.Picasso
 import com.youth.banner.adapter.BannerAdapter
+import org.ldc.module_res.uts.GlideUts
 
 class HomeBannerAdapter(data: ArrayList<BannerModelItem>) :
     BannerAdapter<BannerModelItem, HomeBannerAdapter.VH>(data) {
@@ -29,8 +27,10 @@ class HomeBannerAdapter(data: ArrayList<BannerModelItem>) :
 
     override fun onBindView(holder: VH?, data: BannerModelItem?, position: Int, size: Int) {
         if (null == data) return
-        Picasso.get().load(data.imagePath)
-            .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE).into(holder!!.iconBanner)
-
+        GlideUts.setImageFitCenter(
+            holder!!.itemView.context,
+            data.imagePath,
+            holder.iconBanner
+        )
     }
 }

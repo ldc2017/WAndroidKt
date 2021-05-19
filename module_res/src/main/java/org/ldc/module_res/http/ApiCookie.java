@@ -1,4 +1,4 @@
-package com.ldc.wandroidkt.http;
+package org.ldc.module_res.http;
 
 import java.util.ArrayList;
 import java.util.HashMap;

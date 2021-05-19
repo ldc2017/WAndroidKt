@@ -12,6 +12,7 @@ import com.ldc.wandroidkt.ui.activitys.LoginActivity
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody
+import org.ldc.module_res.http.Api
 
 class RequestLogStatusInterceptor() : Interceptor {
     private var handlerThread: HandlerThread = HandlerThread("check_login_thread")

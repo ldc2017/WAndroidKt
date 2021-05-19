@@ -1,4 +1,4 @@
-package com.ldc.wandroidkt.core
+package org.ldc.module_res.core
 
 import android.os.Bundle
 import io.reactivex.disposables.Disposable

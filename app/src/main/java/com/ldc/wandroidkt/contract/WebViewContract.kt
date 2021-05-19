@@ -1,6 +1,6 @@
 package com.ldc.wandroidkt.contract
 
-import com.ldc.wandroidkt.core.IView
+import org.ldc.module_res.core.IView
 
 interface WebViewContract {
     interface V : IView {}

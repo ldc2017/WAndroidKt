@@ -1,9 +1,9 @@
 package com.ldc.wandroidkt.presenter
 
 import com.ldc.wandroidkt.contract.MyFavoriteContract
-import com.ldc.wandroidkt.core.BasePresenter
+import org.ldc.module_res.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
-import com.ldc.wandroidkt.http.ApiScheduler
+import org.ldc.module_res.http.ApiScheduler
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.FavoriteArticleListModel
 import io.reactivex.Observer

@@ -9,9 +9,9 @@ import com.blankj.utilcode.util.ToastUtils
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.RegisterContract
-import com.ldc.wandroidkt.core.BaseActivity
+import org.ldc.module_res.core.BaseActivity
 import com.ldc.wandroidkt.databinding.ActivityRegisterBinding
-import com.ldc.wandroidkt.http.Api
+import org.ldc.module_res.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.presenter.RegisterPresenter
 
@@ -31,11 +31,11 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
         return R.layout.activity_register
     }
 
-    override fun init_presenter(): RegisterPresenter {
+    override fun initPresenter(): RegisterPresenter {
         return RegisterPresenter(this)
     }
 
-    override fun init_view() {
+    override fun initView() {
         mBinding.toolBar.title = "注册"
         setSupportActionBar(mBinding.toolBar)
         supportActionBar?.setHomeButtonEnabled(true)
@@ -43,7 +43,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
 
     }
 
-    override fun init_data() {
+    override fun initData() {
         mBinding.eventListner = EventListener()
 
     }

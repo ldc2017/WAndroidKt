@@ -10,7 +10,7 @@ import com.just.agentweb.AgentWeb
 import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.WebViewContract
-import com.ldc.wandroidkt.core.BaseActivity
+import org.ldc.module_res.core.BaseActivity
 import com.ldc.wandroidkt.databinding.ActivityWebViewBinding
 import com.ldc.wandroidkt.presenter.WebViewPresenter
 import com.yanzhenjie.permission.AndPermission
@@ -62,18 +62,18 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding, WebViewPresenter>()
         return R.layout.activity_web_view
     }
 
-    override fun init_presenter(): WebViewPresenter {
+    override fun initPresenter(): WebViewPresenter {
         return WebViewPresenter(this)
     }
 
-    override fun init_view() {
+    override fun initView() {
         mBinding.eventListener = EventListener()
         show_toast(strName)
 
     }
 
     @SuppressLint("WrongConstant")
-    override fun init_data() {
+    override fun initData() {
         AndPermission.with(activity).runtime()
             .permission(android.Manifest.permission.ACCESS_NETWORK_STATE).start()
 

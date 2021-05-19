@@ -10,9 +10,9 @@ import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.IntegralRankAdapter
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.IntegralRankContract
-import com.ldc.wandroidkt.core.BaseActivity
+import org.ldc.module_res.core.BaseActivity
 import com.ldc.wandroidkt.databinding.ActivityIntegralRankBinding
-import com.ldc.wandroidkt.http.Api
+import org.ldc.module_res.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.IntegralRankModel
 import com.ldc.wandroidkt.presenter.IntegralRankPresenter
@@ -63,11 +63,11 @@ class IntegralRankActivity : BaseActivity<ActivityIntegralRankBinding, IntegralR
         return R.layout.activity_integral_rank
     }
 
-    override fun init_presenter(): IntegralRankPresenter {
+    override fun initPresenter(): IntegralRankPresenter {
         return IntegralRankPresenter(this)
     }
 
-    override fun init_view() {
+    override fun initView() {
         mBinding.refreshView.setOnRefreshLoadMoreListener(onRefreshLoadMoreListener)
         mBinding.refreshView.setEnableLoadMore(true)
         //
@@ -80,7 +80,7 @@ class IntegralRankActivity : BaseActivity<ActivityIntegralRankBinding, IntegralR
 
     }
 
-    override fun init_data() {
+    override fun initData() {
         mPresenter.get_integral_rank_req(curr_index)
 
     }

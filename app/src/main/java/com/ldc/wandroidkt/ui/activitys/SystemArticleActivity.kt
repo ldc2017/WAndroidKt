@@ -14,9 +14,9 @@ import com.ldc.wandroidkt.R
 import com.ldc.wandroidkt.adapter.SystemArticleAdapter
 import com.ldc.wandroidkt.commom.cmConstants
 import com.ldc.wandroidkt.contract.SystemArticleContract
-import com.ldc.wandroidkt.core.BaseActivity
+import org.ldc.module_res.core.BaseActivity
 import com.ldc.wandroidkt.databinding.ActivitySystemArticleBinding
-import com.ldc.wandroidkt.http.Api
+import org.ldc.module_res.http.Api
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.SystemArticleModel
 import com.ldc.wandroidkt.presenter.SystemArticlePresenter
@@ -76,11 +76,11 @@ class SystemArticleActivity : BaseActivity<ActivitySystemArticleBinding, SystemA
         return R.layout.activity_system_article
     }
 
-    override fun init_presenter(): SystemArticlePresenter {
+    override fun initPresenter(): SystemArticlePresenter {
         return SystemArticlePresenter(this)
     }
 
-    override fun init_view() {
+    override fun initView() {
         setSupportActionBar(mBinding.toolBar)
         supportActionBar?.title = curr_name
         supportActionBar?.setHomeButtonEnabled(true)
@@ -92,7 +92,7 @@ class SystemArticleActivity : BaseActivity<ActivitySystemArticleBinding, SystemA
         init_adapter()
     }
 
-    override fun init_data() {
+    override fun initData() {
         mPresenter.get_system_article_req(curr_index, curr_cid)
     }
 

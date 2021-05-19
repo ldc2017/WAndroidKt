@@ -65,4 +65,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ":module_res")
     annotationProcessor Depends.room_compiler
+    annotationProcessor Depends.glide_compiler
 }

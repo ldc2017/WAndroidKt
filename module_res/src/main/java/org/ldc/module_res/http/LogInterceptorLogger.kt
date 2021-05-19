@@ -1,4 +1,4 @@
-package com.ldc.wandroidkt.http
+package org.ldc.module_res.http
 
 import android.util.Log
 import okhttp3.logging.HttpLoggingInterceptor
