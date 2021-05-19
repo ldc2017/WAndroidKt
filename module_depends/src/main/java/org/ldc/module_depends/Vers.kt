@@ -7,8 +7,8 @@ object Vers {
     const val minSdkVersion = 23
     const val targetSdkVersion = 30
 
-    const val versionCode = 18
-    const val versionName = "v1.18"
+    const val versionCode = 19
+    const val versionName = "v1.19"
 
     const val module_versionCode = 1
     const val module_versionName = "1.0"
