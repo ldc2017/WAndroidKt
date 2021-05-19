@@ -4,6 +4,7 @@ import android.os.Handler
 import com.ldc.wandroidkt.contract.WXNumberContract
 import com.ldc.wandroidkt.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
+import com.ldc.wandroidkt.http.ApiScheduler
 import com.ldc.wandroidkt.http.ApiServer
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.WXNumberModel
@@ -19,8 +20,7 @@ class WXNumberPresenter(v: WXNumberContract.V) : BasePresenter<WXNumberContract.
     override fun get_wx_number_req() {
         getView().show_loading("数据加载中···")
         apiServer.get_wx_number()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
+            .compose(ApiScheduler.io2main())
             .subscribe(object : Observer<BaseModel<WXNumberModel>> {
                 var disposable: Disposable? = null
                 override fun onComplete() {

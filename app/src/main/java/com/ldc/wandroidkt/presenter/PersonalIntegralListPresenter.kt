@@ -3,6 +3,7 @@ package com.ldc.wandroidkt.presenter
 import com.ldc.wandroidkt.contract.PersonalIntegralListContract
 import com.ldc.wandroidkt.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
+import com.ldc.wandroidkt.http.ApiScheduler
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.PersonalIntegralListModel
 import io.reactivex.Observer
@@ -15,9 +16,7 @@ class PersonalIntegralListPresenter constructor(v: PersonalIntegralListContract.
     private val apiServer = Api2Request.instances
     override fun get_personal_integral_list_req(index: Int) {
         getView().show_loading("加载中···")
-        apiServer.get_personal_integral_list(index)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        apiServer.get_personal_integral_list(index).compose(ApiScheduler.io2main())
             .subscribe(object : Observer<BaseModel<PersonalIntegralListModel>> {
                 private lateinit var disposable: Disposable
                 override fun onComplete() {

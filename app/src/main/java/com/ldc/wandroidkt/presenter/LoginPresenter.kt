@@ -3,6 +3,7 @@ package com.ldc.wandroidkt.presenter
 import com.ldc.wandroidkt.contract.LoginContract
 import com.ldc.wandroidkt.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
+import com.ldc.wandroidkt.http.ApiScheduler
 import com.ldc.wandroidkt.http.ApiServer
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.LoginModel
@@ -17,9 +18,7 @@ class LoginPresenter constructor(v: LoginContract.V) : BasePresenter<LoginContra
     private val apiServer: ApiServer = Api2Request.instances
     override fun login_req(username: String, password: String) {
         getView().show_loading("登录中···")
-        apiServer.login(username, password)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        apiServer.login(username, password).compose(ApiScheduler.io2main())
             .subscribe(object : Observer<BaseModel<LoginModel>> {
                 lateinit var disposable: Disposable
                 override fun onComplete() {

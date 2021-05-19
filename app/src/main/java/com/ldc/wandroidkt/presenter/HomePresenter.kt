@@ -3,6 +3,7 @@ package com.ldc.wandroidkt.presenter
 import com.ldc.wandroidkt.contract.HomeContract
 import com.ldc.wandroidkt.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
+import com.ldc.wandroidkt.http.ApiScheduler
 import com.ldc.wandroidkt.http.ApiServer
 import com.ldc.wandroidkt.model.BannerModel
 import com.ldc.wandroidkt.model.BaseModel
@@ -18,9 +19,7 @@ open class HomePresenter(v: HomeContract.V) : BasePresenter<HomeContract.V>(v),
     private var apiServer: ApiServer = Api2Request.instances
 
     override fun get_banner_req() {
-        apiServer.get_banner()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
+        apiServer.get_banner().compose(ApiScheduler.io2main())
             .subscribe(object : Observer<BaseModel<BannerModel>> {
                 lateinit var disposable: Disposable
                 override fun onComplete() {

@@ -3,6 +3,7 @@ package com.ldc.wandroidkt.presenter
 import com.ldc.wandroidkt.contract.MainContract
 import com.ldc.wandroidkt.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
+import com.ldc.wandroidkt.http.ApiScheduler
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.PersonalIntegralModel
 import io.reactivex.Observer
@@ -14,9 +15,7 @@ class MainPresenter(v: MainContract.V) : BasePresenter<MainContract.V>(v), MainC
     private val apiServer = Api2Request.instances
     override fun get_personal_integral_req() {
         getView().show_loading("加载中···")
-        apiServer.get_personal_integral()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        apiServer.get_personal_integral().compose(ApiScheduler.io2main())
             .subscribe(object : Observer<BaseModel<PersonalIntegralModel>> {
                 lateinit var disposable: Disposable
                 override fun onComplete() {

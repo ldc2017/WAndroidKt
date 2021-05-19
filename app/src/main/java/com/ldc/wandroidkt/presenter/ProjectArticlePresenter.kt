@@ -3,6 +3,7 @@ package com.ldc.wandroidkt.presenter
 import com.ldc.wandroidkt.contract.ProjectArticleContract
 import com.ldc.wandroidkt.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
+import com.ldc.wandroidkt.http.ApiScheduler
 import com.ldc.wandroidkt.http.ApiServer
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.ProjectArticleModel
@@ -18,9 +19,7 @@ class ProjectArticlePresenter(v: ProjectArticleContract.V) :
 
     override fun get_project_article_req(cid: String, index: Int) {
         getView().show_loading("加载中···")
-        apiServer.get_project_article(index, cid)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        apiServer.get_project_article(index, cid).compose(ApiScheduler.io2main())
             .subscribe(object : Observer<BaseModel<ProjectArticleModel>> {
                 private lateinit var disposable: Disposable
                 override fun onComplete() {

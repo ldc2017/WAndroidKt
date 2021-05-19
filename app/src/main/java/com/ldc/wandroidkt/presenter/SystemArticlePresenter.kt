@@ -3,6 +3,7 @@ package com.ldc.wandroidkt.presenter
 import com.ldc.wandroidkt.contract.SystemArticleContract
 import com.ldc.wandroidkt.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
+import com.ldc.wandroidkt.http.ApiScheduler
 import com.ldc.wandroidkt.http.ApiServer
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.SystemArticleModel
@@ -17,9 +18,7 @@ class SystemArticlePresenter(v: SystemArticleContract.V) :
     private val apiServer: ApiServer = Api2Request.instances
     override fun get_system_article_req(index: Int, cid: String) {
         getView().show_loading("加载中···")
-        apiServer.get_system_article(index, cid)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        apiServer.get_system_article(index, cid).compose(ApiScheduler.io2main())
             .subscribe(object : Observer<BaseModel<SystemArticleModel>> {
                 lateinit var disposable: Disposable
                 override fun onComplete() {

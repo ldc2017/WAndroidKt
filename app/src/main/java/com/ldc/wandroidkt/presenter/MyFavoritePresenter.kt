@@ -3,6 +3,7 @@ package com.ldc.wandroidkt.presenter
 import com.ldc.wandroidkt.contract.MyFavoriteContract
 import com.ldc.wandroidkt.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
+import com.ldc.wandroidkt.http.ApiScheduler
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.FavoriteArticleListModel
 import io.reactivex.Observer
@@ -15,9 +16,7 @@ class MyFavoritePresenter constructor(v: MyFavoriteContract.V) :
     private val apiServer = Api2Request.instances
     override fun get_favorite_article_list_req(index: Int) {
         getView().show_loading("加载中···")
-        apiServer.get_collect_article_list(index)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        apiServer.get_collect_article_list(index).compose(ApiScheduler.io2main())
             .subscribe(object : Observer<BaseModel<FavoriteArticleListModel>> {
                 private lateinit var disposable: Disposable
                 override fun onComplete() {

@@ -3,6 +3,7 @@ package com.ldc.wandroidkt.presenter
 import com.ldc.wandroidkt.contract.SearchArticleContract
 import com.ldc.wandroidkt.core.BasePresenter
 import com.ldc.wandroidkt.http.Api2Request
+import com.ldc.wandroidkt.http.ApiScheduler
 import com.ldc.wandroidkt.model.BaseModel
 import com.ldc.wandroidkt.model.SearchArticleModel
 import io.reactivex.Observer
@@ -17,9 +18,7 @@ class SearchArticlePresenter constructor(v: SearchArticleContract.V) :
     private val apiServer = Api2Request.instances
     override fun search_article_req(index: Int, query: String) {
         getView().show_loading("")
-        apiServer.search_article(index, query)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        apiServer.search_article(index, query).compose(ApiScheduler.io2main())
             .subscribe(object : Observer<BaseModel<SearchArticleModel>> {
                 lateinit var disposable: Disposable
                 override fun onComplete() {
