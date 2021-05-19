@@ -1,0 +1,103 @@
+import org.ldc.module_depends.Vers
+import org.ldc.module_depends.Depends
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion Vers.compileSdkVersion
+    buildToolsVersion Vers.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion Vers.minSdkVersion
+        targetSdkVersion Vers.targetSdkVersion
+        versionCode Vers.module_versionCode
+        versionName Vers.module_versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    api Depends.kotlin_stdlib_jdk7
+    api Depends.core_ktx
+    api Depends.appcompat
+    api Depends.material
+    testApi Depends.junit
+    androidTestApi Depends.test_ext_junit
+    androidTestApi Depends.espresso_core
+
+
+    //
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    api Depends.retrofit2
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    api Depends.retrofit2_converter_gson
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/adapter-rxjava2
+    api Depends.retrofit2_adapter_rxjava2
+    //
+    api Depends.logging_interceptor
+
+    //
+    api Depends.rxandroid2
+    api Depends.rxjava2
+    //
+    api Depends.fragmentationx
+    api Depends.fragmentationx_swipeback
+    //
+    api Depends.utilcodex
+    //
+    api Depends.navigation_fragment
+    api Depends.navigation_ui
+    //
+    api Depends.room_runtime
+
+    //
+    api Depends.multidex
+    //
+    api Depends.bottom_navigation_bar
+    //
+    api Depends.refresh_layout_kernel   //核心必须依赖
+    api Depends.refresh_header_classics   //经典刷新头
+    api Depends.refresh_header_material   //谷歌刷新头
+    api Depends.refresh_footer_classics   //经典加载
+    //
+    api Depends.BaseRecyclerViewAdapterHelper
+    //
+    api Depends.banner//预览版
+    //
+    api Depends.picasso
+    //
+    api Depends.circleimageview
+    //
+    api Depends.permission
+    //
+    api Depends.agentweb
+    //
+    api Depends.flexbox
+    //圆角图片
+    api Depends.roundedimageview
+    //接入微信分享
+    api Depends.open_wx_sdk
+    //屏幕适配
+    api Depends.autosize
+    //label
+    api Depends.LabelsView
+}

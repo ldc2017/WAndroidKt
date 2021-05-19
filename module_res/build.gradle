@@ -1,0 +1,39 @@
+import org.ldc.module_depends.Vers
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion Vers.compileSdkVersion
+    buildToolsVersion Vers.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion Vers.minSdkVersion
+        targetSdkVersion Vers.targetSdkVersion
+        versionCode Vers.module_versionCode
+        versionName Vers.module_versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    api project(path: ':module_common')
+}

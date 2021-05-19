@@ -1,2 +1,5 @@
 rootProject.name='WAndroidKt'
 include ':app'
+include ':module_common'
+include ':module_res'
+includeBuild 'module_depends'
